@@ -1,0 +1,17 @@
+# --- Local CCS Theia & Compiler Build Folders ---
+CPU1_RAM/
+CPU1_FLASH/
+.clangd/
+compile_commands.json
+
+# --- Ignore TI Driverlib Copy ---
+# Since DriverLib is part of C2000Ware, you do not want to track 
+# individual driver files (adc.c, epwm.c, etc.) in your repo.
+device/driverlib/
+
+# --- Temporary/Output Files ---
+*.obj
+*.d
+*.out
+*.map
+*.txt
