@@ -3,6 +3,9 @@ created by suBardagi
 */
 
 #include "board.h"
+#include "epwm.h"
+#include "inc/hw_memmap.h"
+#include "sysctl.h"
 
 void Board_initGPIO(void)
 {
@@ -66,5 +69,21 @@ void Board_initADC(void)
 
 void Board_initEPWM(void)
 {
+    SysCtl_disablePeripheral(SYSCTL_PERIPH_CLK_TBCLKSYNC); // freezing ePWMs
+
+    // Time-base submodule
+    EPWM_setTimeBasePeriod(EPWM6_BASE, PWM_PERIOD_TICKS);
+    EPWM_setTimeBaseCounterMode(EPWM6_BASE, EPWM_COUNTER_MODE_UP_DOWN);
+    EPWM_setClockPrescaler(EPWM6_BASE, EPWM_CLOCK_DIVIDER_1, EPWM_HSCLOCK_DIVIDER_1);
+
+    EPWM_disablePhaseShiftLoad(EPWM6_BASE);
+    EPWM_setPhaseShift(EPWM6_BASE, 0U);
+    EPWM_setSyncOutPulseMode(EPWM6_BASE, EPWM_SYNC_OUT_PULSE_ON_COUNTER_ZERO);
+
+    EPWM_setCounterCompareValue(EPWM6_BASE, EPWM_COUNTER_COMPARE_A, (PWM_PERIOD_TICKS/2U));
+
+    EPWM_setActionQualifierAction(EPWM6_BASE, EPWM_AQ_OUTPUT_A, EPWM_AQ_OUTPUT_HIGH, EPWM_AQ_OUTPUT_ON_TIMEBASE_UP_CMPA);
+    EPWM_setActionQualifierAction(EPWM6_BASE, EPWM_AQ_OUTPUT_A, EPWM_AQ_OUTPUT_LOW, EPWM_AQ_OUTPUT_ON_TIMEBASE_DOWN_CMPA);
     
+
 }
