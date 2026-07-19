@@ -1,0 +1,2330 @@
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+.ccsproject
+.cproject
+.gitignore
+.project
+.settings/org.eclipse.cdt.codan.core.prefs
+.settings/org.eclipse.core.resources.prefs
+28004x_generic_flash_lnk.cmd
+28004x_generic_ram_lnk.cmd
+board.c
+board.h
+c2000.syscfg
+device/device.c
+device/device.h
+device/driverlib.h
+device/f28004x_codestartbranch.asm
+LICENSE
+main.c
+README.md
+targetConfigs/TMS320F280049C.ccxml
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path=".ccsproject">
+<?xml version="1.0" encoding="UTF-8" ?>
+<?ccsproject version="1.0"?>
+<projectOptions>
+	<ccsVariant value="50:Theia-based"/>
+	<ccsVersion value="70.0.0"/>
+	<deviceFamily value="C2000"/>
+	<executableActions value=""/>
+	<createSlaveProjects value=""/>
+	<templateProperties value="id=empty_driverlib_project.projectspec.empty_driverlib_project"/>
+	<origin value="C:\ti\C2000Ware_5_04_00_00\driverlib\f28004x\examples\empty_projects\CCS\empty_driverlib_project.projectspec"/>
+	<filesToOpen value=""/>
+</projectOptions>
+</file>
+
+<file path=".gitignore">
+# --- Local CCS Theia & Compiler Build Folders ---
+CPU1_RAM/
+CPU1_FLASH/
+.clangd/
+compile_commands.json
+
+# --- Ignore TI Driverlib Copy ---
+# Since DriverLib is part of C2000Ware, you do not want to track 
+# individual driver files (adc.c, epwm.c, etc.) in your repo.
+device/driverlib/
+
+# --- Temporary/Output Files ---
+*.obj
+*.d
+*.out
+*.map
+*.txt
+</file>
+
+<file path=".project">
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>Charger_2026_v1.0</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.cdt.managedbuilder.core.genmakebuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>com.ti.ccstudio.core.ccsNature</nature>
+		<nature>org.eclipse.cdt.core.cnature</nature>
+		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
+		<nature>org.eclipse.cdt.core.ccnature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>driverlib.lib</name>
+			<type>1</type>
+			<locationURI>COM_TI_C2000WARE_INSTALL_DIR/driverlib/f28004x/driverlib/ccs/Debug/driverlib.lib</locationURI>
+		</link>
+	</linkedResources>
+	<variableList>
+		<variable>
+			<name>C2000WARE_DLIB_ROOT</name>
+			<value>$%7BCOM_TI_C2000WARE_INSTALL_DIR%7D/driverlib/f28004x/driverlib</value>
+		</variable>
+		<variable>
+			<name>C2000WARE_ROOT</name>
+			<value>$%7BCOM_TI_C2000WARE_INSTALL_DIR%7D</value>
+		</variable>
+		<variable>
+			<name>CLB_SIM_COMPILER</name>
+			<value>file:/C:/TDM-GCC-64/bin</value>
+		</variable>
+		<variable>
+			<name>CLB_SYSCFG_ROOT</name>
+			<value>$%7BCOM_TI_C2000WARE_INSTALL_DIR%7D/utilities/clb_tool/clb_syscfg</value>
+		</variable>
+		<variable>
+			<name>SYSTEMC_INSTALL</name>
+			<value>$%7BCOM_TI_C2000WARE_INSTALL_DIR%7D/utilities/clb_tool/clb_syscfg/systemc-2.3.3</value>
+		</variable>
+	</variableList>
+</projectDescription>
+</file>
+
+<file path=".settings/org.eclipse.cdt.codan.core.prefs">
+eclipse.preferences.version=1
+inEditor=false
+onBuild=false
+</file>
+
+<file path=".settings/org.eclipse.core.resources.prefs">
+eclipse.preferences.version=1
+encoding//CPU1_RAM/device/subdir_rules.mk=UTF-8
+encoding//CPU1_RAM/device/subdir_vars.mk=UTF-8
+encoding//CPU1_RAM/makefile=UTF-8
+encoding//CPU1_RAM/objects.mk=UTF-8
+encoding//CPU1_RAM/sources.mk=UTF-8
+encoding//CPU1_RAM/subdir_rules.mk=UTF-8
+encoding//CPU1_RAM/subdir_vars.mk=UTF-8
+</file>
+
+<file path="28004x_generic_flash_lnk.cmd">
+MEMORY
+{
+PAGE 0 :
+   /* BEGIN is used for the "boot to Flash" bootloader mode   */
+
+   BEGIN           	: origin = 0x080000, length = 0x000002
+   RAMM0           	: origin = 0x0000F6, length = 0x00030A
+
+   RAMLS0          	: origin = 0x008000, length = 0x000800
+   RAMLS1          	: origin = 0x008800, length = 0x000800
+   RAMLS2      		: origin = 0x009000, length = 0x000800
+   RAMLS3      		: origin = 0x009800, length = 0x000800
+   RAMLS4      		: origin = 0x00A000, length = 0x000800
+   RESET           	: origin = 0x3FFFC0, length = 0x000002
+
+   /* Flash sectors */
+   /* BANK 0 */
+   FLASH_BANK0_SEC0  : origin = 0x080002, length = 0x000FFE	/* on-chip Flash */
+   FLASH_BANK0_SEC1  : origin = 0x081000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK0_SEC2  : origin = 0x082000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK0_SEC3  : origin = 0x083000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK0_SEC4  : origin = 0x084000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK0_SEC5  : origin = 0x085000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK0_SEC6  : origin = 0x086000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK0_SEC7  : origin = 0x087000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK0_SEC8  : origin = 0x088000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK0_SEC9  : origin = 0x089000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK0_SEC10 : origin = 0x08A000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK0_SEC11 : origin = 0x08B000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK0_SEC12 : origin = 0x08C000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK0_SEC13 : origin = 0x08D000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK0_SEC14 : origin = 0x08E000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK0_SEC15 : origin = 0x08F000, length = 0x001000	/* on-chip Flash */
+
+   /* BANK 1 */
+   FLASH_BANK1_SEC0  : origin = 0x090000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK1_SEC1  : origin = 0x091000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK1_SEC2  : origin = 0x092000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK1_SEC3  : origin = 0x093000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK1_SEC4  : origin = 0x094000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK1_SEC5  : origin = 0x095000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK1_SEC6  : origin = 0x096000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK1_SEC7  : origin = 0x097000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK1_SEC8  : origin = 0x098000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK1_SEC9  : origin = 0x099000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK1_SEC10 : origin = 0x09A000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK1_SEC11 : origin = 0x09B000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK1_SEC12 : origin = 0x09C000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK1_SEC13 : origin = 0x09D000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK1_SEC14 : origin = 0x09E000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK1_SEC15 : origin = 0x09F000, length = 0x000FF0	/* on-chip Flash */
+
+//   FLASH_BANK1_SEC15_RSVD : origin = 0x09FFF0, length = 0x000010  /* Reserve and do not use for code as per the errata advisory "Memory: Prefetching Beyond Valid Memory" */
+
+PAGE 1 :
+
+   BOOT_RSVD       : origin = 0x000002, length = 0x0000F1     /* Part of M0, BOOT rom will use this for stack */
+   RAMM1           : origin = 0x000400, length = 0x0003F8     /* on-chip RAM block M1 */
+//   RAMM1_RSVD      : origin = 0x0007F8, length = 0x000008     /* Reserve and do not use for code as per the errata advisory "Memory: Prefetching Beyond Valid Memory" */
+
+   RAMLS5      : origin = 0x00A800, length = 0x000800
+   RAMLS6      : origin = 0x00B000, length = 0x000800
+   RAMLS7      : origin = 0x00B800, length = 0x000800
+
+   RAMGS0      : origin = 0x00C000, length = 0x002000
+   RAMGS1      : origin = 0x00E000, length = 0x002000
+   RAMGS2      : origin = 0x010000, length = 0x002000
+   RAMGS3      : origin = 0x012000, length = 0x001FF8
+//   RAMGS3_RSVD : origin = 0x013FF8, length = 0x000008     /* Reserve and do not use for code as per the errata advisory "Memory: Prefetching Beyond Valid Memory" */
+}
+
+
+SECTIONS
+{
+   codestart        : > BEGIN,     PAGE = 0, ALIGN(4)
+   .text            : >> FLASH_BANK0_SEC2 | FLASH_BANK0_SEC3 | FLASH_BANK0_SEC5,   PAGE = 0, ALIGN(4)
+   .cinit           : > FLASH_BANK0_SEC1,     PAGE = 0, ALIGN(4)
+   .switch          : > FLASH_BANK0_SEC1,     PAGE = 0, ALIGN(4)
+   .reset           : > RESET,     PAGE = 0, TYPE = DSECT /* not used, */
+
+   .stack           : > RAMM1,     PAGE = 1
+
+#if defined(__TI_EABI__)
+   .init_array      : > FLASH_BANK0_SEC1,       PAGE = 0,       ALIGN(4)
+   .bss             : > RAMLS5,       PAGE = 1
+   .bss:output      : > RAMLS3,       PAGE = 0
+   .bss:cio         : > RAMLS0,       PAGE = 0
+   .data            : > RAMLS5,       PAGE = 1
+   .sysmem          : > RAMLS5,       PAGE = 1
+   /* Initalized sections go in Flash */
+   .const           : > FLASH_BANK0_SEC4,       PAGE = 0,       ALIGN(4)
+#else
+   .pinit           : > FLASH_BANK0_SEC1,       PAGE = 0,       ALIGN(4)
+   .ebss            : > RAMLS5,       PAGE = 1
+   .esysmem         : > RAMLS5,       PAGE = 1
+   .cio             : > RAMLS0,       PAGE = 0
+   .econst          : > FLASH_BANK0_SEC4,    PAGE = 0, ALIGN(4)
+#endif
+
+   ramgs0           : > RAMGS0,    PAGE = 1
+   ramgs1           : > RAMGS1,    PAGE = 1
+
+ 
+#if defined(__TI_EABI__) 
+   .TI.ramfunc      : LOAD = FLASH_BANK0_SEC1,
+                      RUN = RAMLS0,
+                      LOAD_START(RamfuncsLoadStart),
+                      LOAD_SIZE(RamfuncsLoadSize),
+                      LOAD_END(RamfuncsLoadEnd),
+                      RUN_START(RamfuncsRunStart),
+                      RUN_SIZE(RamfuncsRunSize),
+                      RUN_END(RamfuncsRunEnd),
+                      PAGE = 0, ALIGN(4)
+#else					  
+   .TI.ramfunc      : LOAD = FLASH_BANK0_SEC1,
+                      RUN = RAMLS0,
+                      LOAD_START(_RamfuncsLoadStart),
+                      LOAD_SIZE(_RamfuncsLoadSize),
+                      LOAD_END(_RamfuncsLoadEnd),
+                      RUN_START(_RamfuncsRunStart),
+                      RUN_SIZE(_RamfuncsRunSize),
+                      RUN_END(_RamfuncsRunEnd),
+                      PAGE = 0, ALIGN(4)
+#endif
+
+}
+
+/*
+//===========================================================================
+// End of file.
+//===========================================================================
+*/
+</file>
+
+<file path="28004x_generic_ram_lnk.cmd">
+MEMORY
+{
+PAGE 0 :
+   /* BEGIN is used for the "boot to SARAM" bootloader mode   */
+
+   BEGIN           	: origin = 0x000000, length = 0x000002
+   RAMM0           	: origin = 0x0000F6, length = 0x00030A
+
+   RAMLS0          	: origin = 0x008000, length = 0x000800
+   RAMLS1          	: origin = 0x008800, length = 0x000800
+   RAMLS2      		: origin = 0x009000, length = 0x000800
+   RAMLS3      		: origin = 0x009800, length = 0x000800
+   RAMLS4      		: origin = 0x00A000, length = 0x000800
+   RESET           	: origin = 0x3FFFC0, length = 0x000002
+
+ /* Flash sectors: you can use FLASH for program memory when the RAM is filled up*/
+   /* BANK 0 */
+   FLASH_BANK0_SEC0  : origin = 0x080000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK0_SEC1  : origin = 0x081000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK0_SEC2  : origin = 0x082000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK0_SEC3  : origin = 0x083000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK0_SEC4  : origin = 0x084000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK0_SEC5  : origin = 0x085000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK0_SEC6  : origin = 0x086000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK0_SEC7  : origin = 0x087000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK0_SEC8  : origin = 0x088000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK0_SEC9  : origin = 0x089000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK0_SEC10 : origin = 0x08A000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK0_SEC11 : origin = 0x08B000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK0_SEC12 : origin = 0x08C000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK0_SEC13 : origin = 0x08D000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK0_SEC14 : origin = 0x08E000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK0_SEC15 : origin = 0x08F000, length = 0x001000	/* on-chip Flash */
+
+  /* BANK 1 */
+   FLASH_BANK1_SEC0  : origin = 0x090000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK1_SEC1  : origin = 0x091000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK1_SEC2  : origin = 0x092000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK1_SEC3  : origin = 0x093000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK1_SEC4  : origin = 0x094000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK1_SEC5  : origin = 0x095000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK1_SEC6  : origin = 0x096000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK1_SEC7  : origin = 0x097000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK1_SEC8  : origin = 0x098000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK1_SEC9  : origin = 0x099000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK1_SEC10 : origin = 0x09A000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK1_SEC11 : origin = 0x09B000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK1_SEC12 : origin = 0x09C000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK1_SEC13 : origin = 0x09D000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK1_SEC14 : origin = 0x09E000, length = 0x001000	/* on-chip Flash */
+   FLASH_BANK1_SEC15 : origin = 0x09F000, length = 0x001000	/* on-chip Flash */
+
+PAGE 1 :
+
+   BOOT_RSVD       : origin = 0x000002, length = 0x0000F1     /* Part of M0, BOOT rom will use this for stack */
+   RAMM1           : origin = 0x000400, length = 0x0003F8     /* on-chip RAM block M1 */
+//   RAMM1_RSVD      : origin = 0x0007F8, length = 0x000008     /* Reserve and do not use for code as per the errata advisory "Memory: Prefetching Beyond Valid Memory" */
+
+   RAMLS5      : origin = 0x00A800, length = 0x000800
+   RAMLS6      : origin = 0x00B000, length = 0x000800
+   RAMLS7      : origin = 0x00B800, length = 0x000800
+   
+   RAMGS0      : origin = 0x00C000, length = 0x002000
+   RAMGS1      : origin = 0x00E000, length = 0x002000
+   RAMGS2      : origin = 0x010000, length = 0x002000
+   RAMGS3      : origin = 0x012000, length = 0x001FF8
+//   RAMGS3_RSVD : origin = 0x013FF8, length = 0x000008     /* Reserve and do not use for code as per the errata advisory "Memory: Prefetching Beyond Valid Memory" */
+}
+
+/*You can arrange the .text, .cinit, .const, .pinit, .switch and .econst to FLASH when RAM is filled up.*/
+SECTIONS
+{
+   codestart        : > BEGIN,     PAGE = 0
+   .TI.ramfunc      : > RAMM0,      PAGE = 0
+   .text            : >> RAMLS0 | RAMLS1 | RAMLS2 | RAMLS3 | RAMLS4,   PAGE = 0
+   .cinit           : > RAMM0,     PAGE = 0
+   .switch          : > RAMM0,     PAGE = 0
+   .reset           : > RESET,     PAGE = 0, TYPE = DSECT /* not used, */
+
+   .stack           : > RAMM1,     PAGE = 1
+
+#if defined(__TI_EABI__)
+   .bss             : > RAMLS5,     PAGE = 1
+   .bss:output      : > RAMLS5,     PAGE = 1
+   .init_array      : > RAMM0,      PAGE = 0
+   .const           : > RAMLS5,     PAGE = 1
+   .data            : > RAMLS5,     PAGE = 1
+   .sysmem          : > RAMLS5,     PAGE = 1
+   .bss:cio         : > RAMLS0,     PAGE = 0
+#else
+   .pinit           : > RAMM0,      PAGE = 0
+   .ebss            : > RAMLS5,     PAGE = 1 
+   .econst          : > RAMLS5,     PAGE = 1
+   .esysmem         : > RAMLS5,     PAGE = 1
+   .cio             : > RAMLS0,     PAGE = 0 
+#endif
+
+   ramgs0           : > RAMGS0,    PAGE = 1
+   ramgs1           : > RAMGS1,    PAGE = 1  
+}
+
+/*
+//===========================================================================
+// End of file.
+//===========================================================================
+*/
+</file>
+
+<file path="board.h">
+/* 
+created by suBardagi
+*/
+
+#ifndef BOARD_H_
+#define BOARD_H_
+
+#include "board.h"
+#include "driverlib.h"
+#include "device.h"
+
+#define EPWM_CLK_FREQ       100000000U  // System frequency
+#define CHARGER_PWM_FREQ    200000U  // PWM frequency
+#define PWM_PERIOD_TICKS    (EPWM_CLK_FREQ/(2U*CHARGER_PWM_FREQ))
+
+#define PFC_I_SENSE_CH      ADC_CH_ADCIN0
+#define PFC_V_DC_MID_CH     ADC_CH_ADCIN2
+#define PFC_V_AC_CH         ADC_CH_ADCIN4
+
+#define DAB_IND_I_SENSE_CH  ADC_CH_ADCIN10
+#define DAB_I_OUT_SENSE_CH  ADC_CH_ADCIN1
+#define DAB_VOUT_SENSE_CH   ADC_CH_ADCIN6
+#define ACQPS_SYS_CLKS  14
+
+void Board_initGPIO(void);
+void Board_initPWM(void);
+void Board_initADC(void);
+void Board_init(void);
+
+#endif /* BOARD_H_ */
+</file>
+
+<file path="device/device.c">
+//#############################################################################
+//
+// FILE:   device.c
+//
+// TITLE:  Device setup for examples.
+//
+//#############################################################################
+//
+//
+// $Copyright:
+// Copyright (C) 2024 Texas Instruments Incorporated - http://www.ti.com/
+//
+// Redistribution and use in source and binary forms, with or without 
+// modification, are permitted provided that the following conditions 
+// are met:
+// 
+//   Redistributions of source code must retain the above copyright 
+//   notice, this list of conditions and the following disclaimer.
+// 
+//   Redistributions in binary form must reproduce the above copyright
+//   notice, this list of conditions and the following disclaimer in the 
+//   documentation and/or other materials provided with the   
+//   distribution.
+// 
+//   Neither the name of Texas Instruments Incorporated nor the names of
+//   its contributors may be used to endorse or promote products derived
+//   from this software without specific prior written permission.
+// 
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 
+// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT 
+// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT 
+// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT 
+// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
+// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
+// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+// $
+//#############################################################################
+
+//
+// Included Files
+//
+#include "device.h"
+#include "driverlib.h"
+#ifdef __cplusplus
+using std::memcpy;
+#endif
+#ifdef CMDTOOL
+#include "device_cmd.h"
+#endif
+
+#define PASS 0
+#define FAIL 1
+
+uint32_t Example_PassCount = 0;
+uint32_t Example_Fail = 0;
+
+//*****************************************************************************
+//
+// Function to initialize the device. Primarily initializes system control to a
+// known state by disabling the watchdog, setting up the SYSCLKOUT frequency,
+// and enabling the clocks to the peripherals.
+// The function also configures the GPIO pins 22 and 23 in digital mode.
+// To configure these pins as analog pins, use the function GPIO_setAnalogMode
+//
+// Note : In case XTAL is used as the PLL source, it is recommended to invoke
+// the Device_verifyXTAL() before configuring PLL
+//
+//*****************************************************************************
+void Device_init(void)
+{
+    //
+    // Disable the watchdog
+    //
+    SysCtl_disableWatchdog();
+#ifdef CMDTOOL
+    CMD_init();
+#endif
+
+#ifdef _FLASH
+#ifndef CMDTOOL
+    //
+    // Copy time critical code and flash setup code to RAM. This includes the
+    // following functions: InitFlash();
+    //
+    // The RamfuncsLoadStart, RamfuncsLoadSize, and RamfuncsRunStart symbols
+    // are created by the linker. Refer to the device .cmd file.
+    //
+    memcpy(&RamfuncsRunStart, &RamfuncsLoadStart, (size_t)&RamfuncsLoadSize);
+#endif
+    //
+    // Call Flash Initialization to setup flash waitstates. This function must
+    // reside in RAM.
+    //
+    Flash_initModule(FLASH0CTRL_BASE, FLASH0ECC_BASE, DEVICE_FLASH_WAITSTATES);
+#endif
+
+    //
+    // Set up PLL control and clock dividers
+    //
+    SysCtl_setClock(DEVICE_SETCLOCK_CFG);
+
+    //
+    // Make sure the LSPCLK divider is set to the default (divide by 4)
+    //
+    SysCtl_setLowSpeedClock(SYSCTL_LSPCLK_PRESCALE_4);
+
+    //
+    // These asserts will check that the #defines for the clock rates in
+    // device.h match the actual rates that have been configured. If they do
+    // not match, check that the calculations of DEVICE_SYSCLK_FREQ and
+    // DEVICE_LSPCLK_FREQ are accurate. Some examples will not perform as
+    // expected if these are not correct.
+    //
+    ASSERT(SysCtl_getClock(DEVICE_OSCSRC_FREQ) == DEVICE_SYSCLK_FREQ);
+    ASSERT(SysCtl_getLowSpeedClock(DEVICE_OSCSRC_FREQ) == DEVICE_LSPCLK_FREQ);
+
+#ifndef _FLASH
+    //
+    // Call Device_cal function when run using debugger
+    // This function is called as part of the Boot code. The function is called
+    // in the Device_init function since during debug time resets, the boot code
+    // will not be executed and the gel script will reinitialize all the
+    // registers and the calibrated values will be lost.
+    // Sysctl_deviceCal is a wrapper function for Device_Cal
+    //
+    SysCtl_deviceCal();
+#endif
+
+    //
+    // Turn on all peripherals
+    //
+    Device_enableAllPeripherals();
+
+    //
+    //Disable DC DC in Analog block
+    //
+    ASysCtl_disableDCDC();
+
+    //
+    //Configure GPIO in Push Pull,Output Mode
+    //
+    GPIO_setPadConfig(22U, GPIO_PIN_TYPE_STD);
+    GPIO_setPadConfig(23U, GPIO_PIN_TYPE_STD);
+    GPIO_setDirectionMode(22U, GPIO_DIR_MODE_OUT);
+    GPIO_setDirectionMode(23U, GPIO_DIR_MODE_OUT);
+
+    //
+    // Configure GPIO22 and GPIO23 as digital pins
+    //
+    GPIO_setAnalogMode(22U, GPIO_ANALOG_DISABLED);
+    GPIO_setAnalogMode(23U, GPIO_ANALOG_DISABLED);
+}
+
+//*****************************************************************************
+//
+// Function to turn on all peripherals, enabling reads and writes to the
+// peripherals' registers.
+//
+// Note that to reduce power, unused peripherals should be disabled.
+//
+//*****************************************************************************
+void Device_enableAllPeripherals(void)
+{
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_CLA1);
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_DMA);
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_TIMER0);
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_TIMER1);
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_TIMER2);
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_HRPWM);
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_TBCLKSYNC);
+
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_EPWM1);
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_EPWM2);
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_EPWM3);
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_EPWM4);
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_EPWM5);
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_EPWM6);
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_EPWM7);
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_EPWM8);
+
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_ECAP1);
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_ECAP2);
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_ECAP3);
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_ECAP4);
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_ECAP5);
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_ECAP6);
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_ECAP7);
+
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_EQEP1);
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_EQEP2);
+
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_SD1);
+
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_SCIA);
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_SCIB);
+
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_SPIA);
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_SPIB);
+
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_I2CA);
+
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_CANA);
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_CANB);
+
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_ADCA);
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_ADCB);
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_ADCC);
+
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_CMPSS1);
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_CMPSS2);
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_CMPSS3);
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_CMPSS4);
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_CMPSS5);
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_CMPSS6);
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_CMPSS7);
+
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_PGA1);
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_PGA2);
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_PGA3);
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_PGA4);
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_PGA5);
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_PGA6);
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_PGA7);
+
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_DACA);
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_DACB);
+
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_LINA);
+
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_PMBUSA);
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_FSITXA);
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_FSIRXA);
+
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_CLB1);
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_CLB2);
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_CLB3);
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_CLB4);
+
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_DCC0);
+}
+
+//*****************************************************************************
+//
+// Function to disable pin locks and enable pullups on GPIOs.
+//
+//*****************************************************************************
+void Device_initGPIO(void)
+{
+    //
+    // Disable pin locks.
+    //
+    GPIO_unlockPortConfig(GPIO_PORT_A, 0xFFFFFFFF);
+    GPIO_unlockPortConfig(GPIO_PORT_B, 0xFFFFFFFF);
+    GPIO_unlockPortConfig(GPIO_PORT_H, 0xFFFFFFFF);
+}
+
+//*****************************************************************************
+//
+// Function to verify the XTAL frequency
+// freq is the XTAL frequency in MHz
+// The function return true if the the actual XTAL frequency matches with the
+// input value
+//
+// Note that this function assumes that the PLL is not already configured and
+// hence uses SysClk freq = 10MHz for DCC calculation
+//
+//*****************************************************************************
+bool Device_verifyXTAL(float freq)
+{
+    //
+    // Use DCC to verify the XTAL frequency using INTOSC2 as reference clock
+    //
+
+    //
+    // Turn on XTAL and wait for it to power up using X1CNT
+    //
+    SysCtl_turnOnOsc(SYSCTL_OSCSRC_XTAL);
+    SysCtl_clearExternalOscCounterValue();
+    while(SysCtl_getExternalOscCounterValue() != SYSCTL_X1CNT_X1CNT_M);
+
+    //
+    // Enable DCC0 clock
+    //
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_DCC0);
+
+    //
+    // Insert atleast 5 cycles delay after enabling the peripheral clock
+    //
+    asm(" RPT #5 || NOP");
+
+    //
+    // Configures XTAL as CLKSRC0 and INTOSC2 as CLKSRC1
+    // Fclk0 = XTAL frequency (input parameter)
+    // Fclk1 = INTOSC2 frequency = 10MHz
+    //
+    // Configuring DCC error tolerance of +/-1%
+    // INTOSC2 can have a variance in frequency of +/-10%
+    //
+    // Assuming PLL is not already configured, SysClk freq = 10MHz
+    //
+    // Note : Update the tolerance and INTOSC2 frequency variance as necessary.
+    //
+    return (DCC_verifyClockFrequency(DCC0_BASE,
+                                     DCC_COUNT1SRC_INTOSC2, 10.0F,
+                                     DCC_COUNT0SRC_XTAL, freq,
+                                     1.0F, 10.0F, 10.0F));
+
+}
+
+//*****************************************************************************
+//
+// Error handling function to be called when an ASSERT is violated
+//
+//*****************************************************************************
+void __error__(const char *filename, uint32_t line)
+{
+    //
+    // An ASSERT condition was evaluated as false. You can use the filename and
+    // line parameters to determine what went wrong.
+    //
+    ESTOP0;
+}
+</file>
+
+<file path="device/device.h">
+//#############################################################################
+//
+// FILE:   device.h
+//
+// TITLE:  Device setup for examples.
+//
+//#############################################################################
+//
+//
+// $Copyright:
+// Copyright (C) 2024 Texas Instruments Incorporated - http://www.ti.com/
+//
+// Redistribution and use in source and binary forms, with or without 
+// modification, are permitted provided that the following conditions 
+// are met:
+// 
+//   Redistributions of source code must retain the above copyright 
+//   notice, this list of conditions and the following disclaimer.
+// 
+//   Redistributions in binary form must reproduce the above copyright
+//   notice, this list of conditions and the following disclaimer in the 
+//   documentation and/or other materials provided with the   
+//   distribution.
+// 
+//   Neither the name of Texas Instruments Incorporated nor the names of
+//   its contributors may be used to endorse or promote products derived
+//   from this software without specific prior written permission.
+// 
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 
+// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT 
+// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT 
+// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT 
+// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
+// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
+// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+// $
+//#############################################################################
+
+#ifndef __DEVICE_H__
+#define __DEVICE_H__
+
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
+//
+// Included Files
+//
+#include "driverlib.h"
+
+//
+// Check for invalid compile flags
+//
+#if defined(__TMS320C28XX_FPU64__)
+#error "Invalid FPU Configuration"
+#endif
+#if defined(__TMS320C28XX_TMU1__)
+#error "Invalid TMU Configuration"
+#endif
+#if defined(__TMS320C28XX_IDIV__)
+#error "Invalid IDIV Configuration"
+#endif
+
+//*****************************************************************************
+//
+// Defines for pin numbers and other GPIO configuration
+//
+//*****************************************************************************
+#ifdef _LAUNCHXL_F280049C
+//
+// LaunchPad
+//
+
+//
+// LEDs
+//
+#define DEVICE_GPIO_PIN_LED1        23U  // GPIO number for LD4
+#define DEVICE_GPIO_PIN_LED2        34U  // GPIO number for LD5
+#define DEVICE_GPIO_CFG_LED1        GPIO_23_GPIO23  // "pinConfig" for LD4
+#define DEVICE_GPIO_CFG_LED2        GPIO_34_GPIO34  // "pinConfig" for LD5
+
+//
+// CANA
+//
+#define DEVICE_GPIO_PIN_CANTXA      32U  // GPIO number for CANTXA
+#define DEVICE_GPIO_PIN_CANRXA      33U  // GPIO number for CANRXA
+#define DEVICE_GPIO_CFG_CANRXA      GPIO_33_CANA_RX  // "pinConfig" for CANA RX
+#define DEVICE_GPIO_CFG_CANTXA      GPIO_32_CANA_TX  // "pinConfig" for CANA TX
+
+//
+// CAN External Loopback
+//
+#define DEVICE_GPIO_CFG_CANRXB      GPIO_10_CANB_RX  // "pinConfig" for CANB RX
+#define DEVICE_GPIO_CFG_CANTXB      GPIO_8_CANB_TX   // "pinConfig" for CANB TX
+
+
+//
+// LINA
+//
+#define DEVICE_GPIO_CFG_LINTXA      GPIO_37_LINA_TX  // "pinConfig" for LINA TX
+#define DEVICE_GPIO_CFG_LINRXA      GPIO_35_LINA_RX  // "pinConfig" for LINA RX
+
+//
+// FSI
+//
+#define DEVICE_GPIO_PIN_FSI_RXCLK   33U  // GPIO number for FSI RXCLK
+#define DEVICE_GPIO_PIN_FSI_RX0     12U  // GPIO number for FSI RX0
+#define DEVICE_GPIO_PIN_FSI_RX1      2U  // GPIO number for FSI RX1
+#define DEVICE_GPIO_CFG_FSI_TXCLK   GPIO_7_FSITXA_CLK  // "pinConfig" for FSI TXCLK
+#define DEVICE_GPIO_CFG_FSI_TX0     GPIO_6_FSITXA_D0  // "pinConfig" for FSI TX0
+#define DEVICE_GPIO_CFG_FSI_TX1     GPIO_25_FSITXA_D1  // "pinConfig" for FSI TX1
+#define DEVICE_GPIO_CFG_FSI_RXCLK   GPIO_33_FSIRXA_CLK  // "pinConfig" for FSI RXCLK
+#define DEVICE_GPIO_CFG_FSI_RX0     GPIO_12_FSIRXA_D0  // "pinConfig" for FSI RX0
+#define DEVICE_GPIO_CFG_FSI_RX1     GPIO_2_FSIRXA_D1  // "pinConfig" for FSI RX1
+
+//
+// SPI
+//
+#define DEVICE_GPIO_PIN_SPICLKA     56U  // GPIO number for SPI CLKA
+#define DEVICE_GPIO_PIN_SPISIMOA    16U  // GPIO number for SPI SIMOA
+#define DEVICE_GPIO_PIN_SPISOMIA    17U  // GPIO number for SPI SOMIA
+#define DEVICE_GPIO_PIN_SPISTEA     57U  // GPIO number for SPI STEA
+#define DEVICE_GPIO_CFG_SPICLKA     GPIO_56_SPIA_CLK   // "pinConfig" for SPI CLKA
+#define DEVICE_GPIO_CFG_SPISIMOA    GPIO_16_SPIA_SIMO  // "pinConfig" for SPI SIMOA
+#define DEVICE_GPIO_CFG_SPISOMIA    GPIO_17_SPIA_SOMI  // "pinConfig" for SPI SOMIA
+#define DEVICE_GPIO_CFG_SPISTEA     GPIO_57_SPIA_STE   // "pinConfig" for SPI STEA
+#define DEVICE_GPIO_PIN_SPICLKB     22U  // GPIO number for SPI CLKB
+#define DEVICE_GPIO_PIN_SPISIMOB    24U  // GPIO number for SPI SIMOB
+#define DEVICE_GPIO_PIN_SPISOMIB    31U  // GPIO number for SPI SOMIB
+#define DEVICE_GPIO_PIN_SPISTEB     27U  // GPIO number for SPI STEB
+#define DEVICE_GPIO_CFG_SPICLKB     GPIO_22_SPIB_CLK   // "pinConfig" for SPI CLKB
+#define DEVICE_GPIO_CFG_SPISIMOB    GPIO_24_SPIB_SIMO  // "pinConfig" for SPI SIMOB
+#define DEVICE_GPIO_CFG_SPISOMIB    GPIO_31_SPIB_SOMI  // "pinConfig" for SPI SOMIB
+#define DEVICE_GPIO_CFG_SPISTEB     GPIO_27_SPIB_STE   // "pinConfig" for SPI STEB
+
+//
+// I2C
+//
+#define DEVICE_GPIO_PIN_SDAA        35U  // GPIO number for I2C SDAA
+#define DEVICE_GPIO_PIN_SCLA        37U  // GPIO number for I2C SCLA
+#define DEVICE_GPIO_CFG_SDAA        GPIO_35_I2CA_SDA  // "pinConfig" for I2C SDAA
+#define DEVICE_GPIO_CFG_SCLA        GPIO_37_I2CA_SCL  // "pinConfig" for I2C SCLA
+
+//
+// eQEP
+//
+#define DEVICE_GPIO_PIN_EQEP1A      35U  // GPIO number for EQEP 1A
+#define DEVICE_GPIO_PIN_EQEP1B      37U  // GPIO number for EQEP 1B
+#define DEVICE_GPIO_PIN_EQEP1I      59U  // GPIO number for EQEP 1I
+#define DEVICE_GPIO_CFG_EQEP1A      GPIO_35_EQEP1_A  // "pinConfig" for EQEP 1A
+#define DEVICE_GPIO_CFG_EQEP1B      GPIO_37_EQEP1_B  // "pinConfig" for EQEP 1B
+#define DEVICE_GPIO_CFG_EQEP1I      GPIO_59_EQEP1_INDEX  // "pinConfig" for EQEP 1I
+
+//
+// EPWM
+//
+#define DEVICE_PERIPHERAL_BASE_EPWM EPWM6_BASE  // Base peripheral EPWM 6
+#define DEVICE_PERIPHERAL_INT_EPWM  INT_EPWM6   // Base peripheral EPWM 6 interrupt
+#define DEVICE_GPIO_PIN_EPWMxA      10U  // GPIO number for EPWM6A
+#define DEVICE_GPIO_PIN_EPWMxB      11U  // GPIO number for EPWM6B
+#define DEVICE_GPIO_PIN_IOINDEX     8U   // GPIO number for IO Index
+#define DEVICE_GPIO_CFG_EPWMxA      GPIO_10_EPWM6_A  // "pinConfig" for EPWM6A
+#define DEVICE_GPIO_CFG_EPWMxB      GPIO_11_EPWM6_B  // "pinConfig" for EPWM6B
+#define DEVICE_GPIO_CFG_IOINDEX     GPIO_8_GPIO8    // "pinConfig" for IO Index
+
+#else
+//
+// ControlCARD
+//    
+
+//
+// LEDs
+//
+#define DEVICE_GPIO_PIN_LED1        31U  // GPIO number for LD2
+#define DEVICE_GPIO_PIN_LED2        34U  // GPIO number for LD3
+#define DEVICE_GPIO_CFG_LED1        GPIO_31_GPIO31  // "pinConfig" for LD2
+#define DEVICE_GPIO_CFG_LED2        GPIO_34_GPIO34  // "pinConfig" for LD3
+
+//
+// CANA
+//
+#define DEVICE_GPIO_PIN_CANTXA      31U  // GPIO number for CANTXA
+#define DEVICE_GPIO_PIN_CANRXA      30U  // GPIO number for CANRXA
+
+//
+// CAN External Loopback
+//
+#define DEVICE_GPIO_CFG_CANRXA      GPIO_30_CANA_RX  // "pinConfig" for CANA RX
+#define DEVICE_GPIO_CFG_CANTXA      GPIO_31_CANA_TX  // "pinConfig" for CANA TX
+#define DEVICE_GPIO_CFG_CANRXB      GPIO_10_CANB_RX  // "pinConfig" for CANB RX
+#define DEVICE_GPIO_CFG_CANTXB      GPIO_8_CANB_TX   // "pinConfig" for CANB TX
+
+//
+// LINA
+//
+#define DEVICE_GPIO_CFG_LINTXA      GPIO_58_LINA_TX  // "pinConfig" for LINA TX
+#define DEVICE_GPIO_CFG_LINRXA      GPIO_59_LINA_RX  // "pinConfig" for LINA RX
+
+//
+// FSI
+//
+#define DEVICE_GPIO_PIN_FSI_RXCLK   13U  // GPIO number for FSI RXCLK
+#define DEVICE_GPIO_PIN_FSI_RX0     12U  // GPIO number for FSI RX0
+#define DEVICE_GPIO_PIN_FSI_RX1     11U  // GPIO number for FSI RX1
+#define DEVICE_GPIO_CFG_FSI_TXCLK   GPIO_27_FSITXA_CLK  // "pinConfig" for FSI TXCLK
+#define DEVICE_GPIO_CFG_FSI_TX0     GPIO_26_FSITXA_D0  // "pinConfig" for FSI TX0
+#define DEVICE_GPIO_CFG_FSI_TX1     GPIO_25_FSITXA_D1  // "pinConfig" for FSI TX1
+#define DEVICE_GPIO_CFG_FSI_RXCLK   GPIO_13_FSIRXA_CLK  // "pinConfig" for FSI RXCLK
+#define DEVICE_GPIO_CFG_FSI_RX0     GPIO_12_FSIRXA_D0  // "pinConfig" for FSI RX0
+#define DEVICE_GPIO_CFG_FSI_RX1     GPIO_11_FSIRXA_D1  // "pinConfig" for FSI RX1
+
+//
+// SPI
+//
+#define DEVICE_GPIO_PIN_SPICLKA     9U  // GPIO number for SPI CLKA
+#define DEVICE_GPIO_PIN_SPISIMOA    8U  // GPIO number for SPI SIMOA
+#define DEVICE_GPIO_PIN_SPISOMIA    10U  // GPIO number for SPI SOMIA
+#define DEVICE_GPIO_PIN_SPISTEA     11U  // GPIO number for SPI STEA
+#define DEVICE_GPIO_CFG_SPICLKA     GPIO_9_SPIA_CLK   // "pinConfig" for SPI CLKA
+#define DEVICE_GPIO_CFG_SPISIMOA    GPIO_8_SPIA_SIMO  // "pinConfig" for SPI SIMOA
+#define DEVICE_GPIO_CFG_SPISOMIA    GPIO_10_SPIA_SOMI // "pinConfig" for SPI SOMIA
+#define DEVICE_GPIO_CFG_SPISTEA     GPIO_11_SPIA_STE   // "pinConfig" for SPI STEA
+#define DEVICE_GPIO_PIN_SPICLKB     26U  // GPIO number for SPI CLKB
+#define DEVICE_GPIO_PIN_SPISIMOB    24U  // GPIO number for SPI SIMOB
+#define DEVICE_GPIO_PIN_SPISOMIB    25U  // GPIO number for SPI SOMIB
+#define DEVICE_GPIO_PIN_SPISTEB     27U  // GPIO number for SPI STEB
+#define DEVICE_GPIO_CFG_SPICLKB     GPIO_26_SPIB_CLK   // "pinConfig" for SPI CLKB
+#define DEVICE_GPIO_CFG_SPISIMOB    GPIO_24_SPIB_SIMO  // "pinConfig" for SPI SIMOB
+#define DEVICE_GPIO_CFG_SPISOMIB    GPIO_25_SPIB_SOMI  // "pinConfig" for SPI SOMIB
+#define DEVICE_GPIO_CFG_SPISTEB     GPIO_27_SPIB_STE   // "pinConfig" for SPI STEB
+
+//
+// I2C
+//
+#define DEVICE_GPIO_PIN_SDAA        32U  // GPIO number for I2C SDAA
+#define DEVICE_GPIO_PIN_SCLA        33U  // GPIO number for I2C SCLA
+#define DEVICE_GPIO_CFG_SDAA        GPIO_32_I2CA_SDA  // "pinConfig" for I2C SDAA
+#define DEVICE_GPIO_CFG_SCLA        GPIO_33_I2CA_SCL  // "pinConfig" for I2C SCLA
+
+//
+// eQEP
+//
+#define DEVICE_GPIO_PIN_EQEP1A      6U  // GPIO number for EQEP 1A
+#define DEVICE_GPIO_PIN_EQEP1B      7U  // GPIO number for EQEP 1B
+#define DEVICE_GPIO_PIN_EQEP1I      9U  // GPIO number for EQEP 1I
+#define DEVICE_GPIO_CFG_EQEP1A      GPIO_6_EQEP1_A  // "pinConfig" for EQEP 1A
+#define DEVICE_GPIO_CFG_EQEP1B      GPIO_7_EQEP1_B  // "pinConfig" for EQEP 1B
+#define DEVICE_GPIO_CFG_EQEP1I      GPIO_9_EQEP1_INDEX  // "pinConfig" for EQEP 1I
+
+//
+// EPWM
+//
+#define DEVICE_PERIPHERAL_BASE_EPWM EPWM1_BASE  // Base peripheral EPWM 1
+#define DEVICE_PERIPHERAL_INT_EPWM  INT_EPWM1   // Base peripheral EPWM 1 interrupt
+#define DEVICE_GPIO_PIN_EPWMxA      0U  // GPIO number for EPWM1A
+#define DEVICE_GPIO_PIN_EPWMxB      1U  // GPIO number for EPWM1B
+#define DEVICE_GPIO_PIN_IOINDEX     2U  // GPIO number for IO Index
+#define DEVICE_GPIO_CFG_EPWMxA      GPIO_0_EPWM1_A  // "pinConfig" for EPWM1A
+#define DEVICE_GPIO_CFG_EPWMxB      GPIO_1_EPWM1_B  // "pinConfig" for EPWM1B
+#define DEVICE_GPIO_CFG_IOINDEX     GPIO_2_GPIO2   // "pinConfig" for IO Index
+#endif
+
+#define DEVICE_GPIO_CFG_EPWM1A      GPIO_0_EPWM1_A  // "pinConfig" for EPWM1A
+#define DEVICE_GPIO_PIN_EPWM1A      0U              // GPIO number for EPWM1A
+//
+// SCI for USB-to-UART adapter on FTDI chip
+//
+#define DEVICE_GPIO_PIN_SCIRXDA     28U             // GPIO number for SCI RX
+#define DEVICE_GPIO_PIN_SCITXDA     29U             // GPIO number for SCI TX
+#define DEVICE_GPIO_CFG_SCIRXDA     GPIO_28_SCIA_RX // "pinConfig" for SCI RX
+#define DEVICE_GPIO_CFG_SCITXDA     GPIO_29_SCIA_TX // "pinConfig" for SCI TX
+
+//*****************************************************************************
+//
+// Defines related to clock configuration
+//
+//*****************************************************************************
+//
+// 20MHz XTAL on controlCARD and Launchpad. For use with SysCtl_getClock().
+//
+#define DEVICE_OSCSRC_FREQ          20000000U
+
+//
+// Define to pass to SysCtl_setClock(). Will configure the clock as follows:
+// PLLSYSCLK = 20MHz (XTAL_OSC) * 10 (IMULT) * 1 (FMULT) / 2 (PLLCLK_BY_2)
+//
+#define DEVICE_SETCLOCK_CFG         (SYSCTL_OSCSRC_XTAL | SYSCTL_IMULT(10) |  \
+                                     SYSCTL_FMULT_NONE | SYSCTL_SYSDIV(2) |   \
+                                     SYSCTL_PLL_ENABLE)
+
+//
+// 100MHz SYSCLK frequency based on the above DEVICE_SETCLOCK_CFG. Update the
+// code below if a different clock configuration is used!
+//
+#define DEVICE_SYSCLK_FREQ          ((DEVICE_OSCSRC_FREQ * 10 * 1) / 2)
+
+//
+// 25MHz LSPCLK frequency based on the above DEVICE_SYSCLK_FREQ and a default
+// low speed peripheral clock divider of 4. Update the code below if a
+// different LSPCLK divider is used!
+//
+#define DEVICE_LSPCLK_FREQ          (DEVICE_SYSCLK_FREQ / 4)
+
+//*****************************************************************************
+//
+// Macro to call SysCtl_delay() to achieve a delay in microseconds. The macro
+// will convert the desired delay in microseconds to the count value expected
+// by the function. \b x is the number of microseconds to delay.
+//
+//*****************************************************************************
+#define DEVICE_DELAY_US(x) SysCtl_delay(((((long double)(x)) / (1000000.0L /  \
+                              (long double)DEVICE_SYSCLK_FREQ)) - 9.0L) / 5.0L)
+
+//*****************************************************************************
+//  Defines for setting FSI clock speeds in normal FSI mode (SPI_MODE == 0)
+//*****************************************************************************
+//
+//  TXCLKIN = INPUT_CLOCK / PRESCALE_VAL
+//  TXCLK (in FSI mode) = TXCLKIN / 2
+//  TXCLK (in SPI mode) = TXCLKIN
+//
+//  Below assumes INPUT_CLOCK == 200 MHz (PLLRAWCLK, SEL_PLLCLK == 1)
+//
+#define FSI_PRESCALE_50MHZ          2U
+#define FSI_PRESCALE_25MHZ          4U
+#define FSI_PRESCALE_10MHZ          10U
+#define FSI_PRESCALE_5MHZ           20U
+
+//*****************************************************************************
+//
+// Defines, Globals, and Header Includes related to Flash Support
+//
+//*****************************************************************************
+#ifdef _FLASH
+#include <stddef.h>
+
+#ifndef CMDTOOL
+extern uint16_t RamfuncsLoadStart;
+extern uint16_t RamfuncsLoadEnd;
+extern uint16_t RamfuncsLoadSize;
+extern uint16_t RamfuncsRunStart;
+extern uint16_t RamfuncsRunEnd;
+extern uint16_t RamfuncsRunSize;
+#endif
+
+#endif
+
+#define DEVICE_FLASH_WAITSTATES 4
+
+
+extern uint32_t Example_PassCount;
+extern uint32_t Example_Fail;
+
+//*****************************************************************************
+//
+// Function Prototypes
+//
+//*****************************************************************************
+//*****************************************************************************
+//*****************************************************************************
+//
+//! \addtogroup device_api
+//! @{
+//
+//***
+//*****************************************************************************
+//
+//! @brief Function to initialize the device. Primarily initializes system control to a
+//! known state by disabling the watchdog, setting up the SYSCLKOUT frequency,
+//! and enabling the clocks to the peripherals.
+//! The function also configures the GPIO pins 22 and 23 in digital mode.
+//! To configure these pins as analog pins, use the function GPIO_setAnalogMode
+//!
+//! \return None
+//
+//*****************************************************************************
+extern void Device_init(void);
+
+//*****************************************************************************
+//
+//!
+//! @brief Function to verify the XTAL frequency
+//! \param freq is the XTAL frequency in MHz
+//! \return The function return true if the the actual XTAL frequency matches with the
+//! input value
+//
+//*****************************************************************************
+extern bool Device_verifyXTAL(float freq);
+
+//*****************************************************************************
+//!
+//!
+//! @brief Function to turn on all peripherals, enabling reads and writes to the
+//! peripherals' registers.
+//!
+//! Note that to reduce power, unused peripherals should be disabled.
+//!
+//! \return None
+//
+//*****************************************************************************
+extern void Device_enableAllPeripherals(void);
+
+//*****************************************************************************
+//!
+//!
+//! @brief Function to disable pin locks and enable pullups on GPIOs.
+//!
+//! \return None
+//
+//*****************************************************************************
+extern void Device_initGPIO(void);
+
+//*****************************************************************************
+//!
+//! @brief Error handling function to be called when an ASSERT is violated
+//!
+//! \param *filename File name in which the error has occurred
+//! \param line Line number within the file
+//! \return None
+//
+//*****************************************************************************
+extern void __error__(const char *filename, uint32_t line);
+
+//*****************************************************************************
+//
+// Close the Doxygen group.
+//! @}
+//
+//*****************************************************************************
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // __DEVICE_H__
+</file>
+
+<file path="device/driverlib.h">
+//#############################################################################
+//
+// FILE:   driverlib.h
+//
+// TITLE:  C28x Driverlib Header File
+//
+//#############################################################################
+//
+//
+// $Copyright:
+// Copyright (C) 2024 Texas Instruments Incorporated - http://www.ti.com/
+//
+// Redistribution and use in source and binary forms, with or without 
+// modification, are permitted provided that the following conditions 
+// are met:
+// 
+//   Redistributions of source code must retain the above copyright 
+//   notice, this list of conditions and the following disclaimer.
+// 
+//   Redistributions in binary form must reproduce the above copyright
+//   notice, this list of conditions and the following disclaimer in the 
+//   documentation and/or other materials provided with the   
+//   distribution.
+// 
+//   Neither the name of Texas Instruments Incorporated nor the names of
+//   its contributors may be used to endorse or promote products derived
+//   from this software without specific prior written permission.
+// 
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 
+// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT 
+// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT 
+// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT 
+// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
+// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
+// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+// $
+//#############################################################################
+#ifndef DRIVERLIB_H
+#define DRIVERLIB_H
+
+#include "inc/hw_memmap.h"
+
+#include "adc.h"
+#include "asysctl.h"
+#include "can.h"
+#include "cla.h"
+#include "clb.h"
+#include "clapromcrc.h"
+#include "cmpss.h"
+#include "cpu.h"
+#include "cputimer.h"
+#include "dac.h"
+#include "dcc.h"
+#include "dcsm.h"
+#include "debug.h"
+#include "dma.h"
+#include "ecap.h"
+#include "epwm.h"
+#include "eqep.h"
+#include "erad.h"
+#include "flash.h"
+#include "fsi.h"
+#include "gpio.h"
+#include "hrcap.h"
+#include "hrpwm.h"
+#include "i2c.h"
+#include "interrupt.h"
+#include "lin.h"
+#include "memcfg.h"
+#include "pga.h"
+#include "pin_map.h"
+#include "pin_map_legacy.h"
+#include "pmbus.h"
+#include "sci.h"
+#include "sdfm.h"
+#include "spi.h"
+#include "sysctl.h"
+#include "version.h"
+#include "xbar.h"
+
+#include "driver_inclusive_terminology_mapping.h"
+
+#endif  // end of DRIVERLIB_H definition
+</file>
+
+<file path="device/f28004x_codestartbranch.asm">
+;//###########################################################################
+;//
+;// FILE:  f28004x_codestartbranch.asm
+;//
+;// TITLE: Branch for redirecting code execution after boot.
+;//
+;// For these examples, code_start is the first code that is executed after
+;// exiting the boot ROM code.
+;//
+;// The codestart section in the linker cmd file is used to physically place
+;// this code at the correct memory location. This section should be placed
+;// at the location the BOOT ROM will re-direct the code to. For example,
+;// for boot to FLASH this code will be located at 0x80000.
+;//
+;// In addition, the example f28004x projects are setup such that the codegen
+;// entry point is also set to the codestart label. This is done by linker
+;// option -e in the project build options. When the debugger loads the code,
+;// it will automatically set the PC to the "entry point" address indicated by
+;// the -e linker option. In this case the debugger is simply assigning the PC,
+;// it is not the same as a full reset of the device.
+;//
+;// The compiler may warn that the entry point for the project is other then
+;//  _c_init00. _c_init00 is the C environment setup and is run before
+;// main() is entered. The codestart code will re-direct the execution
+;// to _c_init00 and thus there is no worry and this warning can be ignored.
+;//
+;//###########################################################################
+;//
+;//
+;// $Copyright:
+;// Copyright (C) 2024 Texas Instruments Incorporated - http://www.ti.com/
+;//
+;// Redistribution and use in source and binary forms, with or without 
+;// modification, are permitted provided that the following conditions 
+;// are met:
+;// 
+;//   Redistributions of source code must retain the above copyright 
+;//   notice, this list of conditions and the following disclaimer.
+;// 
+;//   Redistributions in binary form must reproduce the above copyright
+;//   notice, this list of conditions and the following disclaimer in the 
+;//   documentation and/or other materials provided with the   
+;//   distribution.
+;// 
+;//   Neither the name of Texas Instruments Incorporated nor the names of
+;//   its contributors may be used to endorse or promote products derived
+;//   from this software without specific prior written permission.
+;// 
+;// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 
+;// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT 
+;// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+;// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT 
+;// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+;// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT 
+;// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+;// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+;// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
+;// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
+;// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+;// $
+;//###########################################################################
+
+***********************************************************************
+
+WD_DISABLE  .set  1    ;set to 1 to disable WD, else set to 0
+
+    .ref _c_int00
+    .global code_start
+
+***********************************************************************
+* Function: codestart section
+*
+* Description: Branch to code starting point
+***********************************************************************
+
+    .sect "codestart"
+    .retain
+
+code_start:
+    .if WD_DISABLE == 1
+        LB wd_disable       ;Branch to watchdog disable code
+    .else
+        LB _c_int00         ;Branch to start of boot._asm in RTS library
+    .endif
+
+;end codestart section
+
+***********************************************************************
+* Function: wd_disable
+*
+* Description: Disables the watchdog timer
+***********************************************************************
+    .if WD_DISABLE == 1
+
+    .text
+wd_disable:
+    SETC OBJMODE        ;Set OBJMODE for 28x object code
+    EALLOW              ;Enable EALLOW protected register access
+    MOVZ DP, #7029h>>6  ;Set data page for WDCR register
+    MOV @7029h, #0068h  ;Set WDDIS bit in WDCR to disable WD
+    EDIS                ;Disable EALLOW protected register access
+    LB _c_int00         ;Branch to start of boot._asm in RTS library
+
+    .endif
+
+;end wd_disable
+
+    .end
+
+;//
+;// End of file.
+;//
+</file>
+
+<file path="LICENSE">
+Apache License
+                           Version 2.0, January 2004
+                        http://www.apache.org/licenses/
+
+   TERMS CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+
+   1. Definitions.
+
+      "License" shall mean the terms and conditions for use, reproduction,
+      and distribution as defined by Sections 1 through 9 of this document.
+
+      "Licensor" shall mean the copyright owner or entity authorized by
+      the copyright owner that is granting the License.
+
+      "Legal Entity" shall mean the union of the acting entity and all
+      other entities that control, are controlled by, or are under common
+      control with that entity. For the purposes of this definition,
+      "control" means (i) the power, direct or indirect, to cause the
+      direction or management of such entity, whether by contract or
+      otherwise, or (ii) ownership of fifty percent (50%) or more of the
+      outstanding shares, or (iii) beneficial ownership of such entity.
+
+      "You" (or "Your") shall mean an individual or Legal Entity
+      exercising permissions granted by this License.
+
+      "Source" form shall mean the preferred form for making modifications,
+      including but not limited to software source code, documentation
+      source, and configuration files.
+
+      "Object" form shall mean any form resulting from mechanical
+      transformation or translation of a Source form, including but
+      not limited to compiled object code, generated documentation,
+      and conversions to other media types.
+
+      "Work" shall mean the work of authorship, whether in Source or
+      Object form, made available under the License, as indicated by a
+      copyright notice that is included in or attached to the work
+      (an example is provided in the Appendix below).
+
+      "Derivative Works" shall mean any work, whether in Source or Object
+      form, that is based on (or derived from) the Work and for which the
+      editorial revisions, annotations, elaborations, or other modifications
+      represent, as a whole, an original work of authorship. For the purposes
+      of this License, Derivative Works shall not include works that remain
+      separable from, or merely link (or bind by name) to the interfaces of,
+      the Work and Derivative Works thereof.
+
+      "Contribution" shall mean any work of authorship, including
+      the original version of the Work and any modifications or additions
+      to that Work or Derivative Works thereof, that is intentionally
+      submitted to Licensor for inclusion in the Work by the copyright owner
+      or by an individual or Legal Entity authorized to submit on behalf
+      of the copyright owner. For the purposes of this definition, "submitted"
+      means any form of electronic, verbal, or written communication sent
+      to the Licensor or its representatives, including but not limited to
+      communication on electronic mailing lists, source code control systems,
+      and issue tracking systems that are managed by, or on behalf of, the
+      Licensor for the purpose of discussing and improving the Work, but
+      excluding communication that is conspicuously marked or otherwise
+      designated in writing by the copyright owner as "Not a Contribution."
+
+      "Contributor" shall mean Licensor and any individual or Legal Entity
+      on behalf of whom a Contribution has been received by Licensor and
+      subsequently incorporated within the Work.
+
+   2. Grant of Copyright License. Subject to the terms and conditions of
+      this License, each Contributor hereby grants to You a perpetual,
+      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+      copyright license to reproduce, prepare Derivative Works of,
+      publicly display, publicly perform, sublicense, and distribute the
+      Work and such Derivative Works in Source or Object form.
+
+   3. Grant of Patent License. Subject to the terms and conditions of
+      this License, each Contributor hereby grants to You a perpetual,
+      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+      (except as stated in this section) patent license to make, have made,
+      use, offer to sell, sell, import, and otherwise transfer the Work,
+      where such license applies only to those patent claims licensable
+      by such Contributor that are necessarily infringed by their
+      Contribution(s) alone or by combination of their Contribution(s)
+      with the Work to which such Contribution(s) was submitted. If You
+      institute patent litigation against any entity (including a
+      cross-claim or counterclaim in a lawsuit) alleging that the Work
+      or a Contribution incorporated within the Work constitutes direct
+      or contributory patent infringement, then any patent licenses
+      granted to You under this License for that Work shall terminate
+      as of the date such litigation is filed.
+
+   4. Redistribution. You may reproduce and distribute copies of the
+      Work or Derivative Works thereof in any medium, with or without
+      modifications, and in Source or Object form, provided that You
+      meet the following conditions:
+
+      (a) You must give any other recipients of the Work or
+          Derivative Works a copy of this License; and
+
+      (b) You must cause any modified files to carry prominent notices
+          stating that You changed the files; and
+
+      (c) You must retain, in the Source form of any Derivative Works
+          that You distribute, all copyright, patent, trademark, and
+          attribution notices from the Source form of the Work,
+          excluding those notices that do not pertain to any part of
+          the Derivative Works; and
+
+      (d) If the Work includes a "NOTICE" text file as part of its
+          distribution, then any Derivative Works that You distribute must
+          include a readable copy of the attribution notices contained
+          within such NOTICE file, excluding those notices that do not
+          pertain to any part of the Derivative Works, in at least one
+          of the following places: within a NOTICE text file distributed
+          as part of the Derivative Works; within the Source form or
+          documentation, if provided along with the Derivative Works; or,
+          within a display generated by the Derivative Works, if and
+          wherever such third-party notices normally appear. The contents
+          of the NOTICE file are for informational purposes only and
+          do not modify the License. You may add Your own attribution
+          notices within Derivative Works that You distribute, alongside
+          or as an addendum to the NOTICE text from the Work, provided
+          that such additional attribution notices cannot be construed
+          as modifying the License.
+
+      You may add Your own copyright statement to Your modifications and
+      may provide additional or different license terms and conditions
+      for use, reproduction, or distribution of Your modifications, or
+      for any such Derivative Works as a whole, provided Your use,
+      reproduction, and distribution of the Work otherwise complies with
+      the conditions stated in this License.
+
+   5. Submission of Contributions. Unless You explicitly state otherwise,
+      any Contribution intentionally submitted for inclusion in the Work
+      by You to the Licensor shall be under the terms and conditions of
+      this License, without any additional terms or conditions.
+      Notwithstanding the above, nothing herein shall supersede or modify
+      the terms of any separate license agreement you may have executed
+      with Licensor regarding such Contributions.
+
+   6. Trademarks. This License does not grant permission to use the trade
+      names, trademarks, service marks, or product names of the Licensor,
+      except as required for reasonable and customary use in describing the
+      origin of the Work and reproducing the content of the NOTICE file.
+
+   7. Disclaimer of Warranty. Unless required by applicable law or
+      agreed to in writing, Licensor provides the Work (and each
+      Contributor provides its Contributions) on an "AS IS" BASIS,
+      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+      implied, including, without limitation any warranties or conditions
+      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A
+      PARTICULAR PURPOSE. You are solely responsible for determining the
+      appropriateness of using or redistributing the Work and assume any
+      risks associated with Your exercise of permissions under this License.
+
+   8. Limitation of Liability. In no event and under no legal theory,
+      whether in tort (including negligence), contract, or otherwise,
+      unless required by applicable law (such as deliberate and
+      intentions) or agreed to in writing, shall any Contributor be
+      liable to You for damages, including any direct, indirect, special,
+      incidental, or consequential damages of any character arising as a
+      result of this License or out of the use or inability to use the
+      Work (including but not limited to damages for loss of goodwill,
+      work stoppage, computer failure or malfunction, or any and all
+      other commercial damages or losses), even if such Contributor
+      has been advised of the possibility of such damages.
+
+   9. Accepting Warranty or Additional Liability. While redistributing
+      the Work or Derivative Works thereof, You may choose to offer,
+      and charge a fee for, acceptance of support, warranty, indemnity,
+      or other liability obligations and/or rights consistent with this
+      License. However, in accepting such obligations, You may act only
+      on Your own behalf and on Your sole responsibility, not on behalf
+      of any other Contributor, and only if You agree to indemnify,
+      defend, and hold each Contributor harmless for any liability
+      incurred by, or claims asserted against, such Contributor by reason
+      of your accepting any such warranty or additional liability.
+
+   END OF TERMS AND CONDITIONS
+
+   Copyright 2026 Efe Oyalı
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+</file>
+
+<file path="main.c">
+//#############################################################################
+//
+// FILE:   empty_driverlib_main.c
+//
+//! \addtogroup driver_example_list
+//! <h1>Empty Project Example</h1> 
+//!
+//! This example is an empty project setup for Driverlib development.
+//!
+//
+//#############################################################################
+//
+//
+// $Copyright:
+// Copyright (C) 2024 Texas Instruments Incorporated - http://www.ti.com/
+//
+// Redistribution and use in source and binary forms, with or without 
+// modification, are permitted provided that the following conditions 
+// are met:
+// 
+//   Redistributions of source code must retain the above copyright 
+//   notice, this list of conditions and the following disclaimer.
+// 
+//   Redistributions in binary form must reproduce the above copyright
+//   notice, this list of conditions and the following disclaimer in the 
+//   documentation and/or other materials provided with the   
+//   distribution.
+// 
+//   Neither the name of Texas Instruments Incorporated nor the names of
+//   its contributors may be used to endorse or promote products derived
+//   from this software without specific prior written permission.
+// 
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 
+// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT 
+// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT 
+// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT 
+// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
+// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
+// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+// $
+//#############################################################################
+
+//
+// Included Files
+//
+#include "driverlib.h"
+#include "device.h"
+#include "board.h"
+
+//
+// Main
+//
+void main(void)
+{
+
+    //
+    // Initialize device clock and peripherals
+    //
+    Device_init();
+
+    //
+    // Disable pin locks and enable internal pull-ups.
+    //
+    Device_initGPIO();
+
+    //
+    // Initialize PIE and clear PIE registers. Disables CPU interrupts.
+    //
+    Interrupt_initModule();
+
+    //
+    // Initialize the PIE vector table with pointers to the shell Interrupt
+    // Service Routines (ISR).
+    //
+    Interrupt_initVectorTable();
+
+    //
+    // PinMux and Peripheral Initialization
+    //
+    Board_init();
+
+    //
+    // C2000Ware Library initialization
+    //
+    //C2000Ware_libraries_init();
+
+    //
+    // Enable Global Interrupt (INTM) and real time interrupt (DBGM)
+    //
+    EINT;
+    ERTM;
+
+    while(1)
+    {
+        
+    }
+}
+
+//
+// End of File
+//
+</file>
+
+<file path="README.md">
+Contact e-mail: efeoyali@hotmail.com
+</file>
+
+<file path=".cproject">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?fileVersion 4.0.0?><cproject storage_type_id="org.eclipse.cdt.core.XmlProjectDescriptionStorage">
+    <storageModule moduleId="org.eclipse.cdt.core.settings">
+        <cconfiguration id="com.ti.ccstudio.buildDefinitions.C2000.Default.667186986">
+            <storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="com.ti.ccstudio.buildDefinitions.C2000.Default.667186986" moduleId="org.eclipse.cdt.core.settings" name="CPU1_RAM">
+                <macros>
+                    <stringMacro name="SYSTEMC_INSTALL" type="VALUE_PATH_ANY" value="${COM_TI_C2000WARE_INSTALL_DIR}/utilities/clb_tool/clb_syscfg/systemc-2.3.3"/>
+                    <stringMacro name="C2000WARE_DLIB_ROOT" type="VALUE_PATH_ANY" value="${COM_TI_C2000WARE_INSTALL_DIR}/driverlib/f28004x/driverlib/"/>
+                    <stringMacro name="C2000WARE_ROOT" type="VALUE_PATH_ANY" value="${COM_TI_C2000WARE_INSTALL_DIR}"/>
+                    <stringMacro name="CLB_SYSCFG_ROOT" type="VALUE_PATH_ANY" value="${COM_TI_C2000WARE_INSTALL_DIR}/utilities/clb_tool/clb_syscfg/"/>
+                    <stringMacro name="GENERATE_DIAGRAM" type="VALUE_TEXT" value="0"/>
+                    <stringMacro name="CLB_SIM_COMPILER" type="VALUE_PATH_ANY" value="C:/TDM-GCC-64/bin"/>
+                </macros>
+                <externalSettings/>
+                <extensions>
+                    <extension id="org.eclipse.cdt.core.GmakeErrorParser" point="com.ti.ccs.project.ErrorParser"/>
+                    <extension id="com.ti.ccs.errorparser.SysConfigErrorParser" point="com.ti.ccs.project.ErrorParser"/>
+                    <extension id="com.ti.ccs.errorparser.CompilerErrorParser_TI" point="com.ti.ccs.project.ErrorParser"/>
+                </extensions>
+            </storageModule>
+            <storageModule moduleId="cdtBuildSystem" version="4.0.0">
+                <configuration artifactExtension="out" artifactName="${ProjName}" buildProperties="" cleanCommand="${CG_CLEAN_CMD}" description="" id="com.ti.ccstudio.buildDefinitions.C2000.Default.667186986" name="CPU1_RAM" parent="com.ti.ccstudio.buildDefinitions.C2000.Default" postbuildStep="            echo &quot;========= Build of the CLB simulation has moved to the CLB Tool. Click the '?' icon by the _Generate CLB Simulation File_ enable for more details (located in the Global Parameters of the Tile Design SysConfig module) =============&quot;           ;if ${GENERATE_DIAGRAM} == 1  ${NODE_TOOL} &quot;${C2000WARE_ROOT}/utilities/clb_tool/clb_syscfg/dot_file_libraries/clbDotUtility.js&quot;  &quot;${C2000WARE_ROOT}/utilities/clb_tool/clb_syscfg/&quot; &quot;${BuildDirectory}/syscfg&quot; &quot;${BuildDirectory}/syscfg/clb.dot&quot;           ;if ${GENERATE_DIAGRAM} == 1  mkdir &quot;${BuildDirectory}/diagrams&quot;           ;if ${GENERATE_DIAGRAM} == 1  ${NODE_TOOL} &quot;${C2000WARE_ROOT}/driverlib/.meta/generate_diagrams.js&quot; &quot;${C2000WARE_ROOT}&quot; &quot;${BuildDirectory}/diagrams&quot; &quot;${BuildDirectory}/syscfg&quot;         ">
+                    <folderInfo id="com.ti.ccstudio.buildDefinitions.C2000.Default.667186986." name="/" resourcePath="">
+                        <toolChain id="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.DebugToolchain.1420608346" name="TI Build Tools" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.DebugToolchain" targetTool="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.linkerDebug.338423969">
+                            <option id="com.ti.ccstudio.buildDefinitions.core.OPT_TAGS.1986673070" superClass="com.ti.ccstudio.buildDefinitions.core.OPT_TAGS" valueType="stringList">
+                                <listOptionValue value="DEVICE_CONFIGURATION_ID=TMS320C28XX.TMS320F280049C"/>
+                                <listOptionValue value="DEVICE_CORE_ID="/>
+                                <listOptionValue value="DEVICE_ENDIANNESS=little"/>
+                                <listOptionValue value="OUTPUT_FORMAT=ELF"/>
+                                <listOptionValue value="RUNTIME_SUPPORT_LIBRARY=libc.a"/>
+                                <listOptionValue value="CCS_MBS_VERSION=70.0.0"/>
+                                <listOptionValue value="PRODUCTS=sysconfig:1.22.0;C2000WARE:5.4.0.00;"/>
+                                <listOptionValue value="PRODUCT_MACRO_IMPORTS={&quot;sysconfig&quot;:[&quot;${SYSCONFIG_TOOL_INCLUDE_PATH}&quot;,&quot;${SYSCONFIG_TOOL_LIBRARY_PATH}&quot;,&quot;${SYSCONFIG_TOOL_LIBRARIES}&quot;,&quot;${SYSCONFIG_TOOL_SYMBOLS}&quot;,&quot;${SYSCONFIG_TOOL_SYSCONFIG_MANIFEST}&quot;],&quot;C2000WARE&quot;:[&quot;${COM_TI_C2000WARE_INCLUDE_PATH}&quot;,&quot;${COM_TI_C2000WARE_LIBRARY_PATH}&quot;,&quot;${COM_TI_C2000WARE_LIBRARIES}&quot;,&quot;${COM_TI_C2000WARE_SYMBOLS}&quot;,&quot;${COM_TI_C2000WARE_SYSCONFIG_MANIFEST}&quot;]}"/>
+                                <listOptionValue value="OUTPUT_TYPE=executable"/>
+                            </option>
+                            <option id="com.ti.ccstudio.buildDefinitions.core.OPT_CODEGEN_VERSION.293237126" superClass="com.ti.ccstudio.buildDefinitions.core.OPT_CODEGEN_VERSION" value="22.6.1.LTS" valueType="string"/>
+                            <targetPlatform id="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.targetPlatformDebug.1195690091" name="Platform" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.targetPlatformDebug"/>
+                            <builder buildPath="${BuildDirectory}" id="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.builderDebug.1042551970" name="GNU Make.CPU1_RAM" parallelBuildOn="true" parallelizationNumber="optimal" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.builderDebug"/>
+                            <tool id="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.compilerDebug.1849464437" name="C2000 Compiler" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.compilerDebug">
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.LARGE_MEMORY_MODEL.677771647" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.LARGE_MEMORY_MODEL" value="true" valueType="boolean"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.UNIFIED_MEMORY.989233854" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.UNIFIED_MEMORY" value="true" valueType="boolean"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.SILICON_VERSION.261149389" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.SILICON_VERSION" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.SILICON_VERSION.28" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.FLOAT_SUPPORT.2109134783" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.FLOAT_SUPPORT" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.FLOAT_SUPPORT.fpu32" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.CLA_SUPPORT.1690680546" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.CLA_SUPPORT" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.CLA_SUPPORT.cla2" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.VCU_SUPPORT.261855075" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.VCU_SUPPORT" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.VCU_SUPPORT.vcu0" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.TMU_SUPPORT.417180035" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.TMU_SUPPORT" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.TMU_SUPPORT.tmu0" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.OPT_LEVEL.1091395603" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.OPT_LEVEL" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.OPT_LEVEL.off" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.INCLUDE_PATH.174046110" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.INCLUDE_PATH" valueType="includePath">
+                                    <listOptionValue value="${SYSCONFIG_TOOL_INCLUDE_PATH}"/>
+                                    <listOptionValue value="${COM_TI_C2000WARE_INCLUDE_PATH}"/>
+                                    <listOptionValue value="${PROJECT_ROOT}"/>
+                                    <listOptionValue value="${C2000WARE_ROOT}"/>
+                                    <listOptionValue value="${PROJECT_ROOT}/device"/>
+                                    <listOptionValue value="${C2000WARE_DLIB_ROOT}"/>
+                                    <listOptionValue value="${CG_TOOL_ROOT}/include"/>
+                                </option>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DEFINE.1292887332" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DEFINE" valueType="definedSymbols">
+                                    <listOptionValue value="${SYSCONFIG_TOOL_SYMBOLS}"/>
+                                    <listOptionValue value="${COM_TI_C2000WARE_SYMBOLS}"/>
+                                    <listOptionValue value="DEBUG"/>
+                                </option>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_SUPPRESS.1608391771" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_SUPPRESS" valueType="stringList">
+                                    <listOptionValue value="10063"/>
+                                </option>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_WARNING.1125936198" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_WARNING" valueType="stringList">
+                                    <listOptionValue value="225"/>
+                                </option>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_WRAP.665456452" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_WRAP" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_WRAP.off" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DISPLAY_ERROR_NUMBER.730503918" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DISPLAY_ERROR_NUMBER" value="true" valueType="boolean"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.GEN_FUNC_SUBSECTIONS.1974052812" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.GEN_FUNC_SUBSECTIONS" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.GEN_FUNC_SUBSECTIONS.on" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.ABI.1559658882" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.ABI" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.ABI.eabi" valueType="enumerated"/>
+                            </tool>
+                            <tool id="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.linkerDebug.338423969" name="C2000 Linker" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.linkerDebug">
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.STACK_SIZE.1327375230" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.STACK_SIZE" value="0x3F8" valueType="string"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.MAP_FILE.1397829648" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.MAP_FILE" value="${ProjName}.map" valueType="string"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.OUTPUT_FILE.1143256706" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.OUTPUT_FILE" value="${ProjName}.out" valueType="string"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.HEAP_SIZE.194099701" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.HEAP_SIZE" value="0x200" valueType="string"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.LIBRARY.1031903118" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.LIBRARY" valueType="libs">
+                                    <listOptionValue value="${SYSCONFIG_TOOL_LIBRARIES}"/>
+                                    <listOptionValue value="${COM_TI_C2000WARE_LIBRARIES}"/>
+                                    <listOptionValue value="c2000ware_libraries.cmd.genlibs"/>
+                                    <listOptionValue value="libc.a"/>
+                                </option>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.SEARCH_PATH.615579090" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.SEARCH_PATH" valueType="libPaths">
+                                    <listOptionValue value="${SYSCONFIG_TOOL_LIBRARY_PATH}"/>
+                                    <listOptionValue value="${COM_TI_C2000WARE_LIBRARY_PATH}"/>
+                                    <listOptionValue value="${CG_TOOL_ROOT}/lib"/>
+                                    <listOptionValue value="${C2000WARE_ROOT}"/>
+                                    <listOptionValue value="${PROJECT_BUILD_DIR}/syscfg"/>
+                                    <listOptionValue value="${CG_TOOL_ROOT}/include"/>
+                                </option>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.DIAG_WRAP.2042635777" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.DIAG_WRAP" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.DIAG_WRAP.off" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.DISPLAY_ERROR_NUMBER.1569265340" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.DISPLAY_ERROR_NUMBER" value="true" valueType="boolean"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.XML_LINK_INFO.832369200" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.XML_LINK_INFO" value="${ProjName}_linkInfo.xml" valueType="string"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.ENTRY_POINT.1577911418" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.ENTRY_POINT" value="code_start" valueType="string"/>
+                            </tool>
+                            <tool id="com.ti.ccstudio.buildDefinitions.C2000_22.6.hex.1814907783" name="C2000 Hex Utility" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.hex"/>
+                            <tool id="com.ti.ccstudio.buildDefinitions.sysConfig.643540693" name="SysConfig" superClass="com.ti.ccstudio.buildDefinitions.sysConfig">
+                                <option id="com.ti.ccstudio.buildDefinitions.sysConfig.PRODUCTS.777775186" superClass="com.ti.ccstudio.buildDefinitions.sysConfig.PRODUCTS" valueType="stringList">
+                                    <listOptionValue value="${SYSCONFIG_TOOL_SYSCONFIG_MANIFEST}"/>
+                                    <listOptionValue value="${COM_TI_C2000WARE_SYSCONFIG_MANIFEST}"/>
+                                    <listOptionValue value="${C2000WARE_ROOT}/.metadata/sdk.json"/>
+                                </option>
+                                <option id="com.ti.ccstudio.buildDefinitions.sysConfig.DEVICE.1957178863" superClass="com.ti.ccstudio.buildDefinitions.sysConfig.DEVICE" value="F28004x" valueType="string"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.sysConfig.PACKAGE.1133593621" superClass="com.ti.ccstudio.buildDefinitions.sysConfig.PACKAGE" value="F28004x_64PM" valueType="string"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.sysConfig.PART.1090633941" superClass="com.ti.ccstudio.buildDefinitions.sysConfig.PART" value="F28004x_64PM" valueType="string"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.sysConfig.CONTEXT.255773504" superClass="com.ti.ccstudio.buildDefinitions.sysConfig.CONTEXT" value="system" valueType="string"/>
+                            </tool>
+                        </toolChain>
+                    </folderInfo>
+                    <sourceEntries>
+                        <entry excluding="c2000.syscfg|device/driverlib|28004x_generic_flash_lnk.cmd|targetConfigs/TMS320F280049C_LaunchPad.ccxml" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+                    </sourceEntries>
+                </configuration>
+            </storageModule>
+            <storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+        </cconfiguration>
+        <cconfiguration id="com.ti.ccstudio.buildDefinitions.C2000.Default.1519453766">
+            <storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="com.ti.ccstudio.buildDefinitions.C2000.Default.1519453766" moduleId="org.eclipse.cdt.core.settings" name="CPU1_FLASH">
+                <macros>
+                    <stringMacro name="SYSTEMC_INSTALL" type="VALUE_PATH_ANY" value="${COM_TI_C2000WARE_INSTALL_DIR}/utilities/clb_tool/clb_syscfg/systemc-2.3.3"/>
+                    <stringMacro name="C2000WARE_DLIB_ROOT" type="VALUE_PATH_ANY" value="${COM_TI_C2000WARE_INSTALL_DIR}/driverlib/f28004x/driverlib/"/>
+                    <stringMacro name="C2000WARE_ROOT" type="VALUE_PATH_ANY" value="${COM_TI_C2000WARE_INSTALL_DIR}"/>
+                    <stringMacro name="CLB_SYSCFG_ROOT" type="VALUE_PATH_ANY" value="${COM_TI_C2000WARE_INSTALL_DIR}/utilities/clb_tool/clb_syscfg/"/>
+                    <stringMacro name="GENERATE_DIAGRAM" type="VALUE_TEXT" value="0"/>
+                    <stringMacro name="CLB_SIM_COMPILER" type="VALUE_PATH_ANY" value="C:/TDM-GCC-64/bin"/>
+                </macros>
+                <externalSettings/>
+                <extensions>
+                    <extension id="org.eclipse.cdt.core.GmakeErrorParser" point="com.ti.ccs.project.ErrorParser"/>
+                    <extension id="com.ti.ccs.errorparser.SysConfigErrorParser" point="com.ti.ccs.project.ErrorParser"/>
+                    <extension id="com.ti.ccs.errorparser.CompilerErrorParser_TI" point="com.ti.ccs.project.ErrorParser"/>
+                </extensions>
+            </storageModule>
+            <storageModule moduleId="cdtBuildSystem" version="4.0.0">
+                <configuration artifactExtension="out" artifactName="${ProjName}" buildProperties="" cleanCommand="${CG_CLEAN_CMD}" description="" id="com.ti.ccstudio.buildDefinitions.C2000.Default.1519453766" name="CPU1_FLASH" parent="com.ti.ccstudio.buildDefinitions.C2000.Default" postbuildStep="            echo &quot;========= Build of the CLB simulation has moved to the CLB Tool. Click the '?' icon by the _Generate CLB Simulation File_ enable for more details (located in the Global Parameters of the Tile Design SysConfig module) =============&quot;           ;if ${GENERATE_DIAGRAM} == 1  ${NODE_TOOL} &quot;${C2000WARE_ROOT}/utilities/clb_tool/clb_syscfg/dot_file_libraries/clbDotUtility.js&quot;  &quot;${C2000WARE_ROOT}/utilities/clb_tool/clb_syscfg/&quot; &quot;${BuildDirectory}/syscfg&quot; &quot;${BuildDirectory}/syscfg/clb.dot&quot;           ;if ${GENERATE_DIAGRAM} == 1  mkdir &quot;${BuildDirectory}/diagrams&quot;           ;if ${GENERATE_DIAGRAM} == 1  ${NODE_TOOL} &quot;${C2000WARE_ROOT}/driverlib/.meta/generate_diagrams.js&quot; &quot;${C2000WARE_ROOT}&quot; &quot;${BuildDirectory}/diagrams&quot; &quot;${BuildDirectory}/syscfg&quot;         ">
+                    <folderInfo id="com.ti.ccstudio.buildDefinitions.C2000.Default.1519453766." name="/" resourcePath="">
+                        <toolChain id="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.DebugToolchain.2085500812" name="TI Build Tools" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.DebugToolchain" targetTool="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.linkerDebug.1999362517">
+                            <option id="com.ti.ccstudio.buildDefinitions.core.OPT_TAGS.1403892488" superClass="com.ti.ccstudio.buildDefinitions.core.OPT_TAGS" valueType="stringList">
+                                <listOptionValue value="DEVICE_CONFIGURATION_ID=TMS320C28XX.TMS320F280049C"/>
+                                <listOptionValue value="DEVICE_CORE_ID="/>
+                                <listOptionValue value="DEVICE_ENDIANNESS=little"/>
+                                <listOptionValue value="OUTPUT_FORMAT=ELF"/>
+                                <listOptionValue value="RUNTIME_SUPPORT_LIBRARY=libc.a"/>
+                                <listOptionValue value="CCS_MBS_VERSION=70.0.0"/>
+                                <listOptionValue value="PRODUCTS=sysconfig:1.22.0;C2000WARE:5.4.0.00;"/>
+                                <listOptionValue value="PRODUCT_MACRO_IMPORTS={&quot;sysconfig&quot;:[&quot;${SYSCONFIG_TOOL_INCLUDE_PATH}&quot;,&quot;${SYSCONFIG_TOOL_LIBRARY_PATH}&quot;,&quot;${SYSCONFIG_TOOL_LIBRARIES}&quot;,&quot;${SYSCONFIG_TOOL_SYMBOLS}&quot;,&quot;${SYSCONFIG_TOOL_SYSCONFIG_MANIFEST}&quot;],&quot;C2000WARE&quot;:[&quot;${COM_TI_C2000WARE_INCLUDE_PATH}&quot;,&quot;${COM_TI_C2000WARE_LIBRARY_PATH}&quot;,&quot;${COM_TI_C2000WARE_LIBRARIES}&quot;,&quot;${COM_TI_C2000WARE_SYMBOLS}&quot;,&quot;${COM_TI_C2000WARE_SYSCONFIG_MANIFEST}&quot;]}"/>
+                                <listOptionValue value="OUTPUT_TYPE=executable"/>
+                            </option>
+                            <option id="com.ti.ccstudio.buildDefinitions.core.OPT_CODEGEN_VERSION.1723171579" superClass="com.ti.ccstudio.buildDefinitions.core.OPT_CODEGEN_VERSION" value="22.6.1.LTS" valueType="string"/>
+                            <targetPlatform id="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.targetPlatformDebug.290576199" name="Platform" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.targetPlatformDebug"/>
+                            <builder buildPath="${BuildDirectory}" id="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.builderDebug.1380603309" name="GNU Make.CPU1_FLASH" parallelBuildOn="true" parallelizationNumber="optimal" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.builderDebug"/>
+                            <tool id="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.compilerDebug.404997512" name="C2000 Compiler" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.compilerDebug">
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.LARGE_MEMORY_MODEL.326230578" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.LARGE_MEMORY_MODEL" value="true" valueType="boolean"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.UNIFIED_MEMORY.170914871" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.UNIFIED_MEMORY" value="true" valueType="boolean"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.SILICON_VERSION.1213100679" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.SILICON_VERSION" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.SILICON_VERSION.28" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.FLOAT_SUPPORT.751887895" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.FLOAT_SUPPORT" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.FLOAT_SUPPORT.fpu32" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.CLA_SUPPORT.1359339527" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.CLA_SUPPORT" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.CLA_SUPPORT.cla2" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.VCU_SUPPORT.1776890415" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.VCU_SUPPORT" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.VCU_SUPPORT.vcu0" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.TMU_SUPPORT.425771371" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.TMU_SUPPORT" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.TMU_SUPPORT.tmu0" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.OPT_LEVEL.79135008" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.OPT_LEVEL" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.OPT_LEVEL.off" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.INCLUDE_PATH.598488083" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.INCLUDE_PATH" valueType="includePath">
+                                    <listOptionValue value="${SYSCONFIG_TOOL_INCLUDE_PATH}"/>
+                                    <listOptionValue value="${COM_TI_C2000WARE_INCLUDE_PATH}"/>
+                                    <listOptionValue value="${PROJECT_ROOT}"/>
+                                    <listOptionValue value="${C2000WARE_ROOT}"/>
+                                    <listOptionValue value="${PROJECT_ROOT}/device"/>
+                                    <listOptionValue value="${C2000WARE_DLIB_ROOT}"/>
+                                    <listOptionValue value="${CG_TOOL_ROOT}/include"/>
+                                </option>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DEFINE.1416520339" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DEFINE" valueType="definedSymbols">
+                                    <listOptionValue value="${SYSCONFIG_TOOL_SYMBOLS}"/>
+                                    <listOptionValue value="${COM_TI_C2000WARE_SYMBOLS}"/>
+                                    <listOptionValue value="DEBUG"/>
+                                    <listOptionValue value="_FLASH"/>
+                                </option>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_SUPPRESS.822695449" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_SUPPRESS" valueType="stringList">
+                                    <listOptionValue value="10063"/>
+                                </option>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_WARNING.658217290" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_WARNING" valueType="stringList">
+                                    <listOptionValue value="225"/>
+                                </option>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_WRAP.645342454" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_WRAP" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_WRAP.off" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DISPLAY_ERROR_NUMBER.832320145" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DISPLAY_ERROR_NUMBER" value="true" valueType="boolean"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.GEN_FUNC_SUBSECTIONS.769216787" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.GEN_FUNC_SUBSECTIONS" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.GEN_FUNC_SUBSECTIONS.on" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.ABI.1922732169" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.ABI" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.ABI.eabi" valueType="enumerated"/>
+                            </tool>
+                            <tool id="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.linkerDebug.1999362517" name="C2000 Linker" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.linkerDebug">
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.STACK_SIZE.994603638" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.STACK_SIZE" value="0x3F8" valueType="string"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.MAP_FILE.1049359529" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.MAP_FILE" value="${ProjName}.map" valueType="string"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.OUTPUT_FILE.789477454" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.OUTPUT_FILE" value="${ProjName}.out" valueType="string"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.HEAP_SIZE.1168764545" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.HEAP_SIZE" value="0x200" valueType="string"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.LIBRARY.1104647004" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.LIBRARY" valueType="libs">
+                                    <listOptionValue value="${SYSCONFIG_TOOL_LIBRARIES}"/>
+                                    <listOptionValue value="${COM_TI_C2000WARE_LIBRARIES}"/>
+                                    <listOptionValue value="c2000ware_libraries.cmd.genlibs"/>
+                                    <listOptionValue value="libc.a"/>
+                                </option>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.SEARCH_PATH.843316854" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.SEARCH_PATH" valueType="libPaths">
+                                    <listOptionValue value="${SYSCONFIG_TOOL_LIBRARY_PATH}"/>
+                                    <listOptionValue value="${COM_TI_C2000WARE_LIBRARY_PATH}"/>
+                                    <listOptionValue value="${CG_TOOL_ROOT}/lib"/>
+                                    <listOptionValue value="${C2000WARE_ROOT}"/>
+                                    <listOptionValue value="${PROJECT_BUILD_DIR}/syscfg"/>
+                                    <listOptionValue value="${CG_TOOL_ROOT}/include"/>
+                                </option>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.DEFINE.455864158" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.DEFINE" valueType="definedSymbols">
+                                    <listOptionValue value="_FLASH"/>
+                                </option>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.DIAG_WRAP.1175173018" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.DIAG_WRAP" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.DIAG_WRAP.off" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.DISPLAY_ERROR_NUMBER.145618921" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.DISPLAY_ERROR_NUMBER" value="true" valueType="boolean"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.XML_LINK_INFO.658990905" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.XML_LINK_INFO" value="${ProjName}_linkInfo.xml" valueType="string"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.ENTRY_POINT.2099386155" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.ENTRY_POINT" value="code_start" valueType="string"/>
+                            </tool>
+                            <tool id="com.ti.ccstudio.buildDefinitions.C2000_22.6.hex.1377630309" name="C2000 Hex Utility" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.hex"/>
+                            <tool id="com.ti.ccstudio.buildDefinitions.sysConfig.1156919772" name="SysConfig" superClass="com.ti.ccstudio.buildDefinitions.sysConfig">
+                                <option id="com.ti.ccstudio.buildDefinitions.sysConfig.PRODUCTS.1262330297" superClass="com.ti.ccstudio.buildDefinitions.sysConfig.PRODUCTS" valueType="stringList">
+                                    <listOptionValue value="${SYSCONFIG_TOOL_SYSCONFIG_MANIFEST}"/>
+                                    <listOptionValue value="${COM_TI_C2000WARE_SYSCONFIG_MANIFEST}"/>
+                                    <listOptionValue value="${C2000WARE_ROOT}/.metadata/sdk.json"/>
+                                </option>
+                                <option id="com.ti.ccstudio.buildDefinitions.sysConfig.DEVICE.2122417986" superClass="com.ti.ccstudio.buildDefinitions.sysConfig.DEVICE" value="F28004x" valueType="string"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.sysConfig.PACKAGE.1384136220" superClass="com.ti.ccstudio.buildDefinitions.sysConfig.PACKAGE" value="F28004x_64PM" valueType="string"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.sysConfig.PART.143086987" superClass="com.ti.ccstudio.buildDefinitions.sysConfig.PART" value="F28004x_64PM" valueType="string"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.sysConfig.CONTEXT.1715763033" superClass="com.ti.ccstudio.buildDefinitions.sysConfig.CONTEXT" value="system" valueType="string"/>
+                            </tool>
+                        </toolChain>
+                    </folderInfo>
+                    <sourceEntries>
+                        <entry excluding="device/driverlib|28004x_generic_ram_lnk.cmd|targetConfigs/TMS320F280049C_LaunchPad.ccxml" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+                    </sourceEntries>
+                </configuration>
+            </storageModule>
+            <storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+        </cconfiguration>
+        <cconfiguration id="com.ti.ccstudio.buildDefinitions.C2000.Default.625787309">
+            <storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="com.ti.ccstudio.buildDefinitions.C2000.Default.625787309" moduleId="org.eclipse.cdt.core.settings" name="CPU1_LAUNCHXL_RAM">
+                <macros>
+                    <stringMacro name="SYSTEMC_INSTALL" type="VALUE_PATH_ANY" value="${COM_TI_C2000WARE_INSTALL_DIR}/utilities/clb_tool/clb_syscfg/systemc-2.3.3"/>
+                    <stringMacro name="C2000WARE_DLIB_ROOT" type="VALUE_PATH_ANY" value="${COM_TI_C2000WARE_INSTALL_DIR}/driverlib/f28004x/driverlib/"/>
+                    <stringMacro name="C2000WARE_ROOT" type="VALUE_PATH_ANY" value="${COM_TI_C2000WARE_INSTALL_DIR}"/>
+                    <stringMacro name="CLB_SYSCFG_ROOT" type="VALUE_PATH_ANY" value="${COM_TI_C2000WARE_INSTALL_DIR}/utilities/clb_tool/clb_syscfg/"/>
+                    <stringMacro name="GENERATE_DIAGRAM" type="VALUE_TEXT" value="0"/>
+                    <stringMacro name="CLB_SIM_COMPILER" type="VALUE_PATH_ANY" value="C:/TDM-GCC-64/bin"/>
+                </macros>
+                <externalSettings/>
+                <extensions>
+                    <extension id="org.eclipse.cdt.core.GmakeErrorParser" point="com.ti.ccs.project.ErrorParser"/>
+                    <extension id="com.ti.ccs.errorparser.SysConfigErrorParser" point="com.ti.ccs.project.ErrorParser"/>
+                    <extension id="com.ti.ccs.errorparser.CompilerErrorParser_TI" point="com.ti.ccs.project.ErrorParser"/>
+                </extensions>
+            </storageModule>
+            <storageModule moduleId="cdtBuildSystem" version="4.0.0">
+                <configuration artifactExtension="out" artifactName="${ProjName}" buildProperties="" cleanCommand="${CG_CLEAN_CMD}" description="" id="com.ti.ccstudio.buildDefinitions.C2000.Default.625787309" name="CPU1_LAUNCHXL_RAM" parent="com.ti.ccstudio.buildDefinitions.C2000.Default" postbuildStep="            echo &quot;========= Build of the CLB simulation has moved to the CLB Tool. Click the '?' icon by the _Generate CLB Simulation File_ enable for more details (located in the Global Parameters of the Tile Design SysConfig module) =============&quot;           ;if ${GENERATE_DIAGRAM} == 1  ${NODE_TOOL} &quot;${C2000WARE_ROOT}/utilities/clb_tool/clb_syscfg/dot_file_libraries/clbDotUtility.js&quot;  &quot;${C2000WARE_ROOT}/utilities/clb_tool/clb_syscfg/&quot; &quot;${BuildDirectory}/syscfg&quot; &quot;${BuildDirectory}/syscfg/clb.dot&quot;           ;if ${GENERATE_DIAGRAM} == 1  mkdir &quot;${BuildDirectory}/diagrams&quot;           ;if ${GENERATE_DIAGRAM} == 1  ${NODE_TOOL} &quot;${C2000WARE_ROOT}/driverlib/.meta/generate_diagrams.js&quot; &quot;${C2000WARE_ROOT}&quot; &quot;${BuildDirectory}/diagrams&quot; &quot;${BuildDirectory}/syscfg&quot;         ">
+                    <folderInfo id="com.ti.ccstudio.buildDefinitions.C2000.Default.625787309." name="/" resourcePath="">
+                        <toolChain id="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.DebugToolchain.1222081682" name="TI Build Tools" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.DebugToolchain" targetTool="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.linkerDebug.1423920445">
+                            <option id="com.ti.ccstudio.buildDefinitions.core.OPT_TAGS.353924764" superClass="com.ti.ccstudio.buildDefinitions.core.OPT_TAGS" valueType="stringList">
+                                <listOptionValue value="DEVICE_CONFIGURATION_ID=TMS320C28XX.TMS320F280049C"/>
+                                <listOptionValue value="DEVICE_CORE_ID="/>
+                                <listOptionValue value="DEVICE_ENDIANNESS=little"/>
+                                <listOptionValue value="OUTPUT_FORMAT=ELF"/>
+                                <listOptionValue value="RUNTIME_SUPPORT_LIBRARY=libc.a"/>
+                                <listOptionValue value="CCS_MBS_VERSION=70.0.0"/>
+                                <listOptionValue value="PRODUCTS=sysconfig:1.22.0;C2000WARE:5.4.0.00;"/>
+                                <listOptionValue value="PRODUCT_MACRO_IMPORTS={&quot;sysconfig&quot;:[&quot;${SYSCONFIG_TOOL_INCLUDE_PATH}&quot;,&quot;${SYSCONFIG_TOOL_LIBRARY_PATH}&quot;,&quot;${SYSCONFIG_TOOL_LIBRARIES}&quot;,&quot;${SYSCONFIG_TOOL_SYMBOLS}&quot;,&quot;${SYSCONFIG_TOOL_SYSCONFIG_MANIFEST}&quot;],&quot;C2000WARE&quot;:[&quot;${COM_TI_C2000WARE_INCLUDE_PATH}&quot;,&quot;${COM_TI_C2000WARE_LIBRARY_PATH}&quot;,&quot;${COM_TI_C2000WARE_LIBRARIES}&quot;,&quot;${COM_TI_C2000WARE_SYMBOLS}&quot;,&quot;${COM_TI_C2000WARE_SYSCONFIG_MANIFEST}&quot;]}"/>
+                                <listOptionValue value="OUTPUT_TYPE=executable"/>
+                            </option>
+                            <option id="com.ti.ccstudio.buildDefinitions.core.OPT_CODEGEN_VERSION.758418001" superClass="com.ti.ccstudio.buildDefinitions.core.OPT_CODEGEN_VERSION" value="22.6.1.LTS" valueType="string"/>
+                            <targetPlatform id="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.targetPlatformDebug.780677379" name="Platform" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.targetPlatformDebug"/>
+                            <builder buildPath="${BuildDirectory}" id="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.builderDebug.41990894" name="GNU Make.CPU1_LAUNCHXL_RAM" parallelBuildOn="true" parallelizationNumber="optimal" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.builderDebug"/>
+                            <tool id="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.compilerDebug.1886801937" name="C2000 Compiler" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.compilerDebug">
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.LARGE_MEMORY_MODEL.1974437877" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.LARGE_MEMORY_MODEL" value="true" valueType="boolean"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.UNIFIED_MEMORY.1524695424" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.UNIFIED_MEMORY" value="true" valueType="boolean"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.SILICON_VERSION.1328402073" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.SILICON_VERSION" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.SILICON_VERSION.28" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.FLOAT_SUPPORT.1570465161" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.FLOAT_SUPPORT" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.FLOAT_SUPPORT.fpu32" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.CLA_SUPPORT.1534208232" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.CLA_SUPPORT" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.CLA_SUPPORT.cla2" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.VCU_SUPPORT.276200346" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.VCU_SUPPORT" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.VCU_SUPPORT.vcu0" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.TMU_SUPPORT.997790320" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.TMU_SUPPORT" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.TMU_SUPPORT.tmu0" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.OPT_LEVEL.323117868" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.OPT_LEVEL" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.OPT_LEVEL.off" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.INCLUDE_PATH.52700946" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.INCLUDE_PATH" valueType="includePath">
+                                    <listOptionValue value="${SYSCONFIG_TOOL_INCLUDE_PATH}"/>
+                                    <listOptionValue value="${COM_TI_C2000WARE_INCLUDE_PATH}"/>
+                                    <listOptionValue value="${PROJECT_ROOT}"/>
+                                    <listOptionValue value="${C2000WARE_ROOT}"/>
+                                    <listOptionValue value="${PROJECT_ROOT}/device"/>
+                                    <listOptionValue value="${C2000WARE_DLIB_ROOT}"/>
+                                    <listOptionValue value="${CG_TOOL_ROOT}/include"/>
+                                </option>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DEFINE.4557882" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DEFINE" valueType="definedSymbols">
+                                    <listOptionValue value="${SYSCONFIG_TOOL_SYMBOLS}"/>
+                                    <listOptionValue value="${COM_TI_C2000WARE_SYMBOLS}"/>
+                                    <listOptionValue value="DEBUG"/>
+                                    <listOptionValue value="_LAUNCHXL_F280049C"/>
+                                </option>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_SUPPRESS.846914447" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_SUPPRESS" valueType="stringList">
+                                    <listOptionValue value="10063"/>
+                                </option>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_WARNING.181183133" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_WARNING" valueType="stringList">
+                                    <listOptionValue value="225"/>
+                                </option>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_WRAP.2054852714" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_WRAP" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_WRAP.off" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DISPLAY_ERROR_NUMBER.540458720" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DISPLAY_ERROR_NUMBER" value="true" valueType="boolean"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.GEN_FUNC_SUBSECTIONS.1593505643" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.GEN_FUNC_SUBSECTIONS" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.GEN_FUNC_SUBSECTIONS.on" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.ABI.1431812187" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.ABI" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.ABI.eabi" valueType="enumerated"/>
+                            </tool>
+                            <tool id="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.linkerDebug.1423920445" name="C2000 Linker" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.linkerDebug">
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.STACK_SIZE.195759165" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.STACK_SIZE" value="0x3F8" valueType="string"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.MAP_FILE.658276204" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.MAP_FILE" value="${ProjName}.map" valueType="string"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.OUTPUT_FILE.484008408" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.OUTPUT_FILE" value="${ProjName}.out" valueType="string"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.HEAP_SIZE.1482893881" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.HEAP_SIZE" value="0x200" valueType="string"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.LIBRARY.87216928" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.LIBRARY" valueType="libs">
+                                    <listOptionValue value="${SYSCONFIG_TOOL_LIBRARIES}"/>
+                                    <listOptionValue value="${COM_TI_C2000WARE_LIBRARIES}"/>
+                                    <listOptionValue value="c2000ware_libraries.cmd.genlibs"/>
+                                    <listOptionValue value="libc.a"/>
+                                </option>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.SEARCH_PATH.1222826405" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.SEARCH_PATH" valueType="libPaths">
+                                    <listOptionValue value="${SYSCONFIG_TOOL_LIBRARY_PATH}"/>
+                                    <listOptionValue value="${COM_TI_C2000WARE_LIBRARY_PATH}"/>
+                                    <listOptionValue value="${CG_TOOL_ROOT}/lib"/>
+                                    <listOptionValue value="${C2000WARE_ROOT}"/>
+                                    <listOptionValue value="${PROJECT_BUILD_DIR}/syscfg"/>
+                                    <listOptionValue value="${CG_TOOL_ROOT}/include"/>
+                                </option>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.DIAG_WRAP.307138598" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.DIAG_WRAP" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.DIAG_WRAP.off" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.DISPLAY_ERROR_NUMBER.1212123875" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.DISPLAY_ERROR_NUMBER" value="true" valueType="boolean"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.XML_LINK_INFO.826492345" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.XML_LINK_INFO" value="${ProjName}_linkInfo.xml" valueType="string"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.ENTRY_POINT.333759032" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.ENTRY_POINT" value="code_start" valueType="string"/>
+                            </tool>
+                            <tool id="com.ti.ccstudio.buildDefinitions.C2000_22.6.hex.2018352647" name="C2000 Hex Utility" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.hex"/>
+                            <tool id="com.ti.ccstudio.buildDefinitions.sysConfig.1749354126" name="SysConfig" superClass="com.ti.ccstudio.buildDefinitions.sysConfig">
+                                <option id="com.ti.ccstudio.buildDefinitions.sysConfig.PRODUCTS.1754869798" superClass="com.ti.ccstudio.buildDefinitions.sysConfig.PRODUCTS" valueType="stringList">
+                                    <listOptionValue value="${SYSCONFIG_TOOL_SYSCONFIG_MANIFEST}"/>
+                                    <listOptionValue value="${COM_TI_C2000WARE_SYSCONFIG_MANIFEST}"/>
+                                    <listOptionValue value="${C2000WARE_ROOT}/.metadata/sdk.json"/>
+                                </option>
+                                <option id="com.ti.ccstudio.buildDefinitions.sysConfig.DEVICE.414194143" superClass="com.ti.ccstudio.buildDefinitions.sysConfig.DEVICE" value="F28004x" valueType="string"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.sysConfig.PACKAGE.946328830" superClass="com.ti.ccstudio.buildDefinitions.sysConfig.PACKAGE" value="F28004x_64PM" valueType="string"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.sysConfig.PART.66997900" superClass="com.ti.ccstudio.buildDefinitions.sysConfig.PART" value="F28004x_64PM" valueType="string"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.sysConfig.CONTEXT.1398708525" superClass="com.ti.ccstudio.buildDefinitions.sysConfig.CONTEXT" value="system" valueType="string"/>
+                            </tool>
+                        </toolChain>
+                    </folderInfo>
+                    <sourceEntries>
+                        <entry excluding="device/driverlib|28004x_generic_flash_lnk.cmd|targetConfigs/TMS320F280049C.ccxml" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+                    </sourceEntries>
+                </configuration>
+            </storageModule>
+            <storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+        </cconfiguration>
+        <cconfiguration id="com.ti.ccstudio.buildDefinitions.C2000.Default.567573146">
+            <storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="com.ti.ccstudio.buildDefinitions.C2000.Default.567573146" moduleId="org.eclipse.cdt.core.settings" name="CPU1_LAUNCHXL_FLASH">
+                <macros>
+                    <stringMacro name="SYSTEMC_INSTALL" type="VALUE_PATH_ANY" value="${COM_TI_C2000WARE_INSTALL_DIR}/utilities/clb_tool/clb_syscfg/systemc-2.3.3"/>
+                    <stringMacro name="C2000WARE_DLIB_ROOT" type="VALUE_PATH_ANY" value="${COM_TI_C2000WARE_INSTALL_DIR}/driverlib/f28004x/driverlib/"/>
+                    <stringMacro name="C2000WARE_ROOT" type="VALUE_PATH_ANY" value="${COM_TI_C2000WARE_INSTALL_DIR}"/>
+                    <stringMacro name="CLB_SYSCFG_ROOT" type="VALUE_PATH_ANY" value="${COM_TI_C2000WARE_INSTALL_DIR}/utilities/clb_tool/clb_syscfg/"/>
+                    <stringMacro name="GENERATE_DIAGRAM" type="VALUE_TEXT" value="0"/>
+                    <stringMacro name="CLB_SIM_COMPILER" type="VALUE_PATH_ANY" value="C:/TDM-GCC-64/bin"/>
+                </macros>
+                <externalSettings/>
+                <extensions>
+                    <extension id="org.eclipse.cdt.core.GmakeErrorParser" point="com.ti.ccs.project.ErrorParser"/>
+                    <extension id="com.ti.ccs.errorparser.SysConfigErrorParser" point="com.ti.ccs.project.ErrorParser"/>
+                    <extension id="com.ti.ccs.errorparser.CompilerErrorParser_TI" point="com.ti.ccs.project.ErrorParser"/>
+                </extensions>
+            </storageModule>
+            <storageModule moduleId="cdtBuildSystem" version="4.0.0">
+                <configuration artifactExtension="out" artifactName="${ProjName}" buildProperties="" cleanCommand="${CG_CLEAN_CMD}" description="" id="com.ti.ccstudio.buildDefinitions.C2000.Default.567573146" name="CPU1_LAUNCHXL_FLASH" parent="com.ti.ccstudio.buildDefinitions.C2000.Default" postbuildStep="            echo &quot;========= Build of the CLB simulation has moved to the CLB Tool. Click the '?' icon by the _Generate CLB Simulation File_ enable for more details (located in the Global Parameters of the Tile Design SysConfig module) =============&quot;           ;if ${GENERATE_DIAGRAM} == 1  ${NODE_TOOL} &quot;${C2000WARE_ROOT}/utilities/clb_tool/clb_syscfg/dot_file_libraries/clbDotUtility.js&quot;  &quot;${C2000WARE_ROOT}/utilities/clb_tool/clb_syscfg/&quot; &quot;${BuildDirectory}/syscfg&quot; &quot;${BuildDirectory}/syscfg/clb.dot&quot;           ;if ${GENERATE_DIAGRAM} == 1  mkdir &quot;${BuildDirectory}/diagrams&quot;           ;if ${GENERATE_DIAGRAM} == 1  ${NODE_TOOL} &quot;${C2000WARE_ROOT}/driverlib/.meta/generate_diagrams.js&quot; &quot;${C2000WARE_ROOT}&quot; &quot;${BuildDirectory}/diagrams&quot; &quot;${BuildDirectory}/syscfg&quot;         ">
+                    <folderInfo id="com.ti.ccstudio.buildDefinitions.C2000.Default.567573146." name="/" resourcePath="">
+                        <toolChain id="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.DebugToolchain.2062646989" name="TI Build Tools" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.DebugToolchain" targetTool="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.linkerDebug.527724648">
+                            <option id="com.ti.ccstudio.buildDefinitions.core.OPT_TAGS.931262200" superClass="com.ti.ccstudio.buildDefinitions.core.OPT_TAGS" valueType="stringList">
+                                <listOptionValue value="DEVICE_CONFIGURATION_ID=TMS320C28XX.TMS320F280049C"/>
+                                <listOptionValue value="DEVICE_CORE_ID="/>
+                                <listOptionValue value="DEVICE_ENDIANNESS=little"/>
+                                <listOptionValue value="OUTPUT_FORMAT=ELF"/>
+                                <listOptionValue value="RUNTIME_SUPPORT_LIBRARY=libc.a"/>
+                                <listOptionValue value="CCS_MBS_VERSION=70.0.0"/>
+                                <listOptionValue value="PRODUCTS=sysconfig:1.22.0;C2000WARE:5.4.0.00;"/>
+                                <listOptionValue value="PRODUCT_MACRO_IMPORTS={&quot;sysconfig&quot;:[&quot;${SYSCONFIG_TOOL_INCLUDE_PATH}&quot;,&quot;${SYSCONFIG_TOOL_LIBRARY_PATH}&quot;,&quot;${SYSCONFIG_TOOL_LIBRARIES}&quot;,&quot;${SYSCONFIG_TOOL_SYMBOLS}&quot;,&quot;${SYSCONFIG_TOOL_SYSCONFIG_MANIFEST}&quot;],&quot;C2000WARE&quot;:[&quot;${COM_TI_C2000WARE_INCLUDE_PATH}&quot;,&quot;${COM_TI_C2000WARE_LIBRARY_PATH}&quot;,&quot;${COM_TI_C2000WARE_LIBRARIES}&quot;,&quot;${COM_TI_C2000WARE_SYMBOLS}&quot;,&quot;${COM_TI_C2000WARE_SYSCONFIG_MANIFEST}&quot;]}"/>
+                                <listOptionValue value="OUTPUT_TYPE=executable"/>
+                            </option>
+                            <option id="com.ti.ccstudio.buildDefinitions.core.OPT_CODEGEN_VERSION.1693377379" superClass="com.ti.ccstudio.buildDefinitions.core.OPT_CODEGEN_VERSION" value="22.6.1.LTS" valueType="string"/>
+                            <targetPlatform id="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.targetPlatformDebug.1649439217" name="Platform" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.targetPlatformDebug"/>
+                            <builder buildPath="${BuildDirectory}" id="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.builderDebug.866480346" name="GNU Make.CPU1_LAUNCHXL_FLASH" parallelBuildOn="true" parallelizationNumber="optimal" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.builderDebug"/>
+                            <tool id="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.compilerDebug.39317737" name="C2000 Compiler" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.compilerDebug">
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.LARGE_MEMORY_MODEL.290303537" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.LARGE_MEMORY_MODEL" value="true" valueType="boolean"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.UNIFIED_MEMORY.232196970" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.UNIFIED_MEMORY" value="true" valueType="boolean"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.SILICON_VERSION.1129711755" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.SILICON_VERSION" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.SILICON_VERSION.28" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.FLOAT_SUPPORT.708225650" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.FLOAT_SUPPORT" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.FLOAT_SUPPORT.fpu32" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.CLA_SUPPORT.1383818782" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.CLA_SUPPORT" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.CLA_SUPPORT.cla2" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.VCU_SUPPORT.358416434" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.VCU_SUPPORT" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.VCU_SUPPORT.vcu0" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.TMU_SUPPORT.133387031" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.TMU_SUPPORT" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.TMU_SUPPORT.tmu0" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.OPT_LEVEL.1639533717" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.OPT_LEVEL" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.OPT_LEVEL.off" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.INCLUDE_PATH.1897239307" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.INCLUDE_PATH" valueType="includePath">
+                                    <listOptionValue value="${SYSCONFIG_TOOL_INCLUDE_PATH}"/>
+                                    <listOptionValue value="${COM_TI_C2000WARE_INCLUDE_PATH}"/>
+                                    <listOptionValue value="${PROJECT_ROOT}"/>
+                                    <listOptionValue value="${C2000WARE_ROOT}"/>
+                                    <listOptionValue value="${PROJECT_ROOT}/device"/>
+                                    <listOptionValue value="${C2000WARE_DLIB_ROOT}"/>
+                                    <listOptionValue value="${CG_TOOL_ROOT}/include"/>
+                                </option>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DEFINE.539506005" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DEFINE" valueType="definedSymbols">
+                                    <listOptionValue value="${SYSCONFIG_TOOL_SYMBOLS}"/>
+                                    <listOptionValue value="${COM_TI_C2000WARE_SYMBOLS}"/>
+                                    <listOptionValue value="DEBUG"/>
+                                    <listOptionValue value="_LAUNCHXL_F280049C"/>
+                                    <listOptionValue value="_FLASH"/>
+                                </option>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_SUPPRESS.798543155" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_SUPPRESS" valueType="stringList">
+                                    <listOptionValue value="10063"/>
+                                </option>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_WARNING.1460931970" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_WARNING" valueType="stringList">
+                                    <listOptionValue value="225"/>
+                                </option>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_WRAP.797069719" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_WRAP" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DIAG_WRAP.off" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DISPLAY_ERROR_NUMBER.38825680" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DISPLAY_ERROR_NUMBER" value="true" valueType="boolean"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.GEN_FUNC_SUBSECTIONS.1474528187" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.GEN_FUNC_SUBSECTIONS" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.GEN_FUNC_SUBSECTIONS.on" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.ABI.515387607" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.ABI" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.ABI.eabi" valueType="enumerated"/>
+                            </tool>
+                            <tool id="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.linkerDebug.527724648" name="C2000 Linker" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.exe.linkerDebug">
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.STACK_SIZE.1950525723" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.STACK_SIZE" value="0x3F8" valueType="string"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.MAP_FILE.1187818911" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.MAP_FILE" value="${ProjName}.map" valueType="string"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.OUTPUT_FILE.1529387123" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.OUTPUT_FILE" value="${ProjName}.out" valueType="string"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.HEAP_SIZE.169375687" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.HEAP_SIZE" value="0x200" valueType="string"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.LIBRARY.1617517744" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.LIBRARY" valueType="libs">
+                                    <listOptionValue value="${SYSCONFIG_TOOL_LIBRARIES}"/>
+                                    <listOptionValue value="${COM_TI_C2000WARE_LIBRARIES}"/>
+                                    <listOptionValue value="c2000ware_libraries.cmd.genlibs"/>
+                                    <listOptionValue value="libc.a"/>
+                                </option>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.SEARCH_PATH.1372846245" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.SEARCH_PATH" valueType="libPaths">
+                                    <listOptionValue value="${SYSCONFIG_TOOL_LIBRARY_PATH}"/>
+                                    <listOptionValue value="${COM_TI_C2000WARE_LIBRARY_PATH}"/>
+                                    <listOptionValue value="${CG_TOOL_ROOT}/lib"/>
+                                    <listOptionValue value="${C2000WARE_ROOT}"/>
+                                    <listOptionValue value="${PROJECT_BUILD_DIR}/syscfg"/>
+                                    <listOptionValue value="${CG_TOOL_ROOT}/include"/>
+                                </option>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.DEFINE.1999271797" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.DEFINE" valueType="definedSymbols">
+                                    <listOptionValue value="_FLASH"/>
+                                </option>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.DIAG_WRAP.1723541959" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.DIAG_WRAP" value="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.DIAG_WRAP.off" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.DISPLAY_ERROR_NUMBER.1948348461" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.DISPLAY_ERROR_NUMBER" value="true" valueType="boolean"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.XML_LINK_INFO.1641236485" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.XML_LINK_INFO" value="${ProjName}_linkInfo.xml" valueType="string"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.ENTRY_POINT.1932748682" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.linkerID.ENTRY_POINT" value="code_start" valueType="string"/>
+                            </tool>
+                            <tool id="com.ti.ccstudio.buildDefinitions.C2000_22.6.hex.1197228815" name="C2000 Hex Utility" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.hex"/>
+                            <tool id="com.ti.ccstudio.buildDefinitions.sysConfig.1097218152" name="SysConfig" superClass="com.ti.ccstudio.buildDefinitions.sysConfig">
+                                <option id="com.ti.ccstudio.buildDefinitions.sysConfig.PRODUCTS.2017463696" superClass="com.ti.ccstudio.buildDefinitions.sysConfig.PRODUCTS" valueType="stringList">
+                                    <listOptionValue value="${SYSCONFIG_TOOL_SYSCONFIG_MANIFEST}"/>
+                                    <listOptionValue value="${COM_TI_C2000WARE_SYSCONFIG_MANIFEST}"/>
+                                    <listOptionValue value="${C2000WARE_ROOT}/.metadata/sdk.json"/>
+                                </option>
+                                <option id="com.ti.ccstudio.buildDefinitions.sysConfig.DEVICE.1631214637" superClass="com.ti.ccstudio.buildDefinitions.sysConfig.DEVICE" value="F28004x" valueType="string"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.sysConfig.PACKAGE.179235190" superClass="com.ti.ccstudio.buildDefinitions.sysConfig.PACKAGE" value="F28004x_64PM" valueType="string"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.sysConfig.PART.79810716" superClass="com.ti.ccstudio.buildDefinitions.sysConfig.PART" value="F28004x_64PM" valueType="string"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.sysConfig.CONTEXT.2062304610" superClass="com.ti.ccstudio.buildDefinitions.sysConfig.CONTEXT" value="system" valueType="string"/>
+                            </tool>
+                        </toolChain>
+                    </folderInfo>
+                    <sourceEntries>
+                        <entry excluding="device/driverlib|28004x_generic_ram_lnk.cmd|targetConfigs/TMS320F280049C.ccxml" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+                    </sourceEntries>
+                </configuration>
+            </storageModule>
+            <storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+        </cconfiguration>
+    </storageModule>
+    <storageModule moduleId="cdtBuildSystem" version="4.0.0">
+        <project id="empty_driverlib_project.com.ti.ccstudio.buildDefinitions.C2000.ProjectType.1558145311" name="C2000" projectType="com.ti.ccstudio.buildDefinitions.C2000.ProjectType"/>
+    </storageModule>
+</cproject>
+</file>
+
+<file path="c2000.syscfg">
+/**
+ * These arguments were used when this file was generated. They will be automatically applied on subsequent loads
+ * via the GUI or CLI. Run CLI with '--help' for additional information on how to override these arguments.
+ * @cliArgs --device "F28004x" --part "F28004x_64PM" --package "F28004x_64PM" --context "system" --product "C2000WARE@5.04.00.00"
+ * @v2CliArgs --device "TMS320F280049C" --package "64PM" --context "system" --product "C2000WARE@5.04.00.00"
+ * @versions {"tool":"1.22.0+3893"}
+ */
+</file>
+
+<file path="targetConfigs/TMS320F280049C.ccxml">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<configurations XML_version="1.2" id="configurations_0">
+    <configuration XML_version="1.2" id="Texas Instruments XDS100v2 USB Debug Probe_0">
+        <instance XML_version="1.2" desc="Texas Instruments XDS100v2 USB Debug Probe_0" href="connections/TIXDS100v2_Connection.xml" id="Texas Instruments XDS100v2 USB Debug Probe_0" xml="TIXDS100v2_Connection.xml" xmlpath="connections"/>
+        <connection XML_version="1.2" id="Texas Instruments XDS100v2 USB Debug Probe_0">
+            <instance XML_version="1.2" href="drivers/tixds100v2icepick_c.xml" id="drivers" xml="tixds100v2icepick_c.xml" xmlpath="drivers"/>
+            <instance XML_version="1.2" href="drivers/tixds100v2c28x.xml" id="drivers" xml="tixds100v2c28x.xml" xmlpath="drivers"/>
+            <instance XML_version="1.2" href="drivers/tixds100v2cla2.xml" id="drivers" xml="tixds100v2cla2.xml" xmlpath="drivers"/>
+            <instance XML_version="1.2" href="drivers/tixds100v2cs_child.xml" id="drivers" xml="tixds100v2cs_child.xml" xmlpath="drivers"/>
+            <platform XML_version="1.2" id="platform_0">
+                <instance XML_version="1.2" desc="TMS320F280049C_0" href="devices/f280049c.xml" id="TMS320F280049C_0" xml="f280049c.xml" xmlpath="devices"/>
+            </platform>
+        </connection>
+    </configuration>
+</configurations>
+</file>
+
+<file path="board.c">
+/*
+created by suBardagi
+*/
+
+#include "board.h"
+#include "epwm.h"
+#include "inc/hw_memmap.h"
+#include "sysctl.h"
+#include "adc.h"
+#include "driverlib.h"
+
+void Board_initGPIO(void)
+{
+    // ePWM routing
+    GPIO_setPinConfig(GPIO_0_EPWM1_A);
+    GPIO_setPinConfig(GPIO_1_EPWM1_B);
+    GPIO_setPinConfig(GPIO_2_EPWM2_A);
+    GPIO_setPinConfig(GPIO_3_EPWM2_B);
+    GPIO_setPinConfig(GPIO_4_EPWM3_A);
+    GPIO_setPinConfig(GPIO_5_EPWM3_B);
+    GPIO_setPinConfig(GPIO_6_EPWM4_A);
+    GPIO_setPinConfig(GPIO_7_EPWM4_B);
+    GPIO_setPinConfig(GPIO_8_EPWM5_A);
+    GPIO_setPinConfig(GPIO_9_EPWM5_B);
+    GPIO_setPinConfig(GPIO_10_EPWM6_A);
+    GPIO_setPinConfig(GPIO_11_EPWM6_B);
+
+    // CAN routing
+    GPIO_setPinConfig(GPIO_12_CANB_TX);
+    GPIO_setPinConfig(GPIO_13_CANB_RX);
+
+    // UART routing
+    GPIO_setPinConfig(GPIO_16_SCIA_TX);
+    GPIO_setPinConfig(GPIO_17_SCIA_RX);
+
+    // Relay drive
+    GPIO_setPinConfig(GPIO_22_GPIO22);
+    GPIO_setDirectionMode(22, GPIO_DIR_MODE_OUT);
+    GPIO_writePin(22, 0);
+
+    // Fan drive
+    GPIO_setPinConfig(GPIO_23_GPIO23);
+    GPIO_setDirectionMode(23, GPIO_DIR_MODE_OUT);
+    GPIO_writePin(23, 0);
+}
+
+void Board_initADC(void)
+{
+    // ADC reference
+    ADC_setVREF(ADCA_BASE, ADC_REFERENCE_EXTERNAL, ADC_REFERENCE_3_3V);
+    ADC_setVREF(ADCB_BASE, ADC_REFERENCE_EXTERNAL, ADC_REFERENCE_3_3V);
+    ADC_setVREF(ADCC_BASE, ADC_REFERENCE_EXTERNAL, ADC_REFERENCE_3_3V);
+
+    ADC_setPrescaler(ADCA_BASE, ADC_CLK_DIV_2_0);
+    ADC_setInterruptPulseMode(ADCA_BASE, ADC_PULSE_END_OF_CONV);
+
+    ADC_enableConverter(ADCA_BASE);
+    DEVICE_DELAY_US(1000);
+
+    ADC_setupSOC(ADCA_BASE, ADC_SOC_NUMBER0, ADC_TRIGGER_EPWM1_SOCA, PFC_I_SENSE_CH, ACQPS_SYS_CLKS);
+    ADC_setupSOC(ADCA_BASE, ADC_SOC_NUMBER1, ADC_TRIGGER_EPWM1_SOCA, PFC_V_DC_MID_CH, ACQPS_SYS_CLKS);
+    ADC_setupSOC(ADCA_BASE, ADC_SOC_NUMBER2, ADC_TRIGGER_EPWM1_SOCA, PFC_V_AC_CH, ACQPS_SYS_CLKS);
+
+    ADC_setInterruptSource(ADCA_BASE, ADC_INT_NUMBER1, ADC_SOC_NUMBER2);
+    ADC_enableInterrupt(ADCA_BASE, ADC_INT_NUMBER1);
+    ADC_clearInterruptStatus(ADCA_BASE, ADC_INT_NUMBER1);
+}
+
+void Board_initEPWM(void)
+{
+    SysCtl_disablePeripheral(SYSCTL_PERIPH_CLK_TBCLKSYNC); // freezing ePWMs
+
+    // Time-base submodule
+    EPWM_setTimeBasePeriod(EPWM6_BASE, PWM_PERIOD_TICKS);
+    EPWM_setTimeBaseCounterMode(EPWM6_BASE, EPWM_COUNTER_MODE_UP_DOWN);
+    EPWM_setClockPrescaler(EPWM6_BASE, EPWM_CLOCK_DIVIDER_1, EPWM_HSCLOCK_DIVIDER_1);
+
+    EPWM_disablePhaseShiftLoad(EPWM6_BASE);
+    EPWM_setPhaseShift(EPWM6_BASE, 0U);
+    EPWM_setSyncOutPulseMode(EPWM6_BASE, EPWM_SYNC_OUT_PULSE_ON_COUNTER_ZERO);
+
+    EPWM_setCounterCompareValue(EPWM6_BASE, EPWM_COUNTER_COMPARE_A, (PWM_PERIOD_TICKS/2U));
+
+    EPWM_setActionQualifierAction(EPWM6_BASE, EPWM_AQ_OUTPUT_A, EPWM_AQ_OUTPUT_HIGH, EPWM_AQ_OUTPUT_ON_TIMEBASE_UP_CMPA);
+    EPWM_setActionQualifierAction(EPWM6_BASE, EPWM_AQ_OUTPUT_A, EPWM_AQ_OUTPUT_LOW, EPWM_AQ_OUTPUT_ON_TIMEBASE_DOWN_CMPA);
+}
+
+void Board_init(void){
+    Board_initGPIO();
+    Board_initEPWM();
+    Board_initADC();
+}
+</file>
+
+</files>

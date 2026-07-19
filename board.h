@@ -5,6 +5,7 @@ created by suBardagi
 #ifndef BOARD_H_
 #define BOARD_H_
 
+#include "board.h"
 #include "driverlib.h"
 #include "device.h"
 
@@ -24,5 +25,6 @@ created by suBardagi
 void Board_initGPIO(void);
 void Board_initPWM(void);
 void Board_initADC(void);
+void Board_init(void);
 
 #endif /* BOARD_H_ */

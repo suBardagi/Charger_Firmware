@@ -50,7 +50,6 @@
 #include "driverlib.h"
 #include "device.h"
 #include "board.h"
-#include "c2000ware_libraries.h"
 
 //
 // Main
@@ -87,7 +86,7 @@ void main(void)
     //
     // C2000Ware Library initialization
     //
-    C2000Ware_libraries_init();
+    //C2000Ware_libraries_init();
 
     //
     // Enable Global Interrupt (INTM) and real time interrupt (DBGM)
