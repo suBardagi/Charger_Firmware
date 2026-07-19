@@ -6,6 +6,7 @@ created by suBardagi
 #include "epwm.h"
 #include "inc/hw_memmap.h"
 #include "sysctl.h"
+#include "adc.h"
 
 void Board_initGPIO(void)
 {
@@ -34,13 +35,11 @@ void Board_initGPIO(void)
     // Relay drive
     GPIO_setPinConfig(GPIO_22_GPIO22);
     GPIO_setDirectionMode(22, GPIO_DIR_MODE_OUT);
-    GPIO_setPinConfig(22,GPIO_PIN_TYPE_STD);
     GPIO_writePin(22, 0);
 
     // Fan drive
     GPIO_setPinConfig(GPIO_23_GPIO23);
     GPIO_setDirectionMode(23, GPIO_DIR_MODE_OUT);
-    GPIO_setPinConfig(23,GPIO_PIN_TYPE_STD);
     GPIO_writePin(23, 0);
 }
 
@@ -52,7 +51,7 @@ void Board_initADC(void)
     ADC_setVREF(ADCC_BASE, ADC_REFERENCE_EXTERNAL, ADC_REFERENCE_3_3V);
 
     ADC_setPrescaler(ADCA_BASE, ADC_CLK_DIV_2_0);
-    ADC_setMode(ADCA_BASE, ADC_RESOLUTION_12BIT, ADC_MODE_SINLGE_ENDED);
+    ADC_setMode(ADCA_BASE, ADC_RESOLUTION_12BIT, ADC_MODE_SINGLE_ENDED);
     ADC_setInterruptPulseMode(ADCA_BASE, ADC_PULSE_END_OF_CONV);
 
     ADC_enableConverter(ADCA_BASE);
