@@ -412,39 +412,6 @@ SECTIONS
 */
 </file>
 
-<file path="board.h">
-/* 
-created by suBardagi
-*/
-
-#ifndef BOARD_H_
-#define BOARD_H_
-
-#include "board.h"
-#include "driverlib.h"
-#include "device.h"
-
-#define EPWM_CLK_FREQ       100000000U  // System frequency
-#define CHARGER_PWM_FREQ    200000U  // PWM frequency
-#define PWM_PERIOD_TICKS    (EPWM_CLK_FREQ/(2U*CHARGER_PWM_FREQ))
-
-#define PFC_I_SENSE_CH      ADC_CH_ADCIN0
-#define PFC_V_DC_MID_CH     ADC_CH_ADCIN2
-#define PFC_V_AC_CH         ADC_CH_ADCIN4
-
-#define DAB_IND_I_SENSE_CH  ADC_CH_ADCIN10
-#define DAB_I_OUT_SENSE_CH  ADC_CH_ADCIN1
-#define DAB_VOUT_SENSE_CH   ADC_CH_ADCIN6
-#define ACQPS_SYS_CLKS  14
-
-void Board_initGPIO(void);
-void Board_initPWM(void);
-void Board_initADC(void);
-void Board_init(void);
-
-#endif /* BOARD_H_ */
-</file>
-
 <file path="device/device.c">
 //#############################################################################
 //
@@ -1615,6 +1582,53 @@ Apache License
    limitations under the License.
 </file>
 
+<file path="README.md">
+Contact e-mail: efeoyali@hotmail.com
+</file>
+
+<file path="board.h">
+/* 
+created by suBardagi
+*/
+
+#ifndef BOARD_H_
+#define BOARD_H_
+
+#include "board.h"
+#include "driverlib.h"
+#include "device.h"
+
+#define EPWM_CLK_FREQ       100000000U  // System frequency
+#define CHARGER_PWM_FREQ    200000U  // PWM frequency
+#define PWM_PERIOD_TICKS    (EPWM_CLK_FREQ/(2U*CHARGER_PWM_FREQ))
+
+#define PFC_I_SENSE_CH      ADC_CH_ADCIN0
+#define PFC_V_DC_MID_CH     ADC_CH_ADCIN2
+#define PFC_V_AC_CH         ADC_CH_ADCIN4
+
+#define DAB_IND_I_SENSE_CH  ADC_CH_ADCIN10
+#define DAB_I_OUT_SENSE_CH  ADC_CH_ADCIN1
+#define DAB_VOUT_SENSE_CH   ADC_CH_ADCIN6
+#define ACQPS_SYS_CLKS  14
+
+void Board_initGPIO(void);
+void Board_initPWM(void);
+void Board_initADC(void);
+void Board_init(void);
+
+#endif /* BOARD_H_ */
+</file>
+
+<file path="c2000.syscfg">
+/**
+ * These arguments were used when this file was generated. They will be automatically applied on subsequent loads
+ * via the GUI or CLI. Run CLI with '--help' for additional information on how to override these arguments.
+ * @cliArgs --device "F28004x" --part "F28004x_64PM" --package "F28004x_64PM" --context "system" --product "C2000WARE@5.04.00.00"
+ * @v2CliArgs --device "TMS320F280049C" --package "64PM" --context "system" --product "C2000WARE@5.04.00.00"
+ * @versions {"tool":"1.22.0+3893"}
+ */
+</file>
+
 <file path="main.c">
 //#############################################################################
 //
@@ -1723,8 +1737,22 @@ void main(void)
 //
 </file>
 
-<file path="README.md">
-Contact e-mail: efeoyali@hotmail.com
+<file path="targetConfigs/TMS320F280049C.ccxml">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<configurations XML_version="1.2" id="configurations_0">
+    <configuration XML_version="1.2" id="Texas Instruments XDS100v2 USB Debug Probe_0">
+        <instance XML_version="1.2" desc="Texas Instruments XDS100v2 USB Debug Probe_0" href="connections/TIXDS100v2_Connection.xml" id="Texas Instruments XDS100v2 USB Debug Probe_0" xml="TIXDS100v2_Connection.xml" xmlpath="connections"/>
+        <connection XML_version="1.2" id="Texas Instruments XDS100v2 USB Debug Probe_0">
+            <instance XML_version="1.2" href="drivers/tixds100v2icepick_c.xml" id="drivers" xml="tixds100v2icepick_c.xml" xmlpath="drivers"/>
+            <instance XML_version="1.2" href="drivers/tixds100v2c28x.xml" id="drivers" xml="tixds100v2c28x.xml" xmlpath="drivers"/>
+            <instance XML_version="1.2" href="drivers/tixds100v2cla2.xml" id="drivers" xml="tixds100v2cla2.xml" xmlpath="drivers"/>
+            <instance XML_version="1.2" href="drivers/tixds100v2cs_child.xml" id="drivers" xml="tixds100v2cs_child.xml" xmlpath="drivers"/>
+            <platform XML_version="1.2" id="platform_0">
+                <instance XML_version="1.2" desc="TMS320F280049C_0" href="devices/f280049c.xml" id="TMS320F280049C_0" xml="f280049c.xml" xmlpath="devices"/>
+            </platform>
+        </connection>
+    </configuration>
+</configurations>
 </file>
 
 <file path=".cproject">
@@ -2202,34 +2230,6 @@ Contact e-mail: efeoyali@hotmail.com
         <project id="empty_driverlib_project.com.ti.ccstudio.buildDefinitions.C2000.ProjectType.1558145311" name="C2000" projectType="com.ti.ccstudio.buildDefinitions.C2000.ProjectType"/>
     </storageModule>
 </cproject>
-</file>
-
-<file path="c2000.syscfg">
-/**
- * These arguments were used when this file was generated. They will be automatically applied on subsequent loads
- * via the GUI or CLI. Run CLI with '--help' for additional information on how to override these arguments.
- * @cliArgs --device "F28004x" --part "F28004x_64PM" --package "F28004x_64PM" --context "system" --product "C2000WARE@5.04.00.00"
- * @v2CliArgs --device "TMS320F280049C" --package "64PM" --context "system" --product "C2000WARE@5.04.00.00"
- * @versions {"tool":"1.22.0+3893"}
- */
-</file>
-
-<file path="targetConfigs/TMS320F280049C.ccxml">
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<configurations XML_version="1.2" id="configurations_0">
-    <configuration XML_version="1.2" id="Texas Instruments XDS100v2 USB Debug Probe_0">
-        <instance XML_version="1.2" desc="Texas Instruments XDS100v2 USB Debug Probe_0" href="connections/TIXDS100v2_Connection.xml" id="Texas Instruments XDS100v2 USB Debug Probe_0" xml="TIXDS100v2_Connection.xml" xmlpath="connections"/>
-        <connection XML_version="1.2" id="Texas Instruments XDS100v2 USB Debug Probe_0">
-            <instance XML_version="1.2" href="drivers/tixds100v2icepick_c.xml" id="drivers" xml="tixds100v2icepick_c.xml" xmlpath="drivers"/>
-            <instance XML_version="1.2" href="drivers/tixds100v2c28x.xml" id="drivers" xml="tixds100v2c28x.xml" xmlpath="drivers"/>
-            <instance XML_version="1.2" href="drivers/tixds100v2cla2.xml" id="drivers" xml="tixds100v2cla2.xml" xmlpath="drivers"/>
-            <instance XML_version="1.2" href="drivers/tixds100v2cs_child.xml" id="drivers" xml="tixds100v2cs_child.xml" xmlpath="drivers"/>
-            <platform XML_version="1.2" id="platform_0">
-                <instance XML_version="1.2" desc="TMS320F280049C_0" href="devices/f280049c.xml" id="TMS320F280049C_0" xml="f280049c.xml" xmlpath="devices"/>
-            </platform>
-        </connection>
-    </configuration>
-</configurations>
 </file>
 
 <file path="board.c">
