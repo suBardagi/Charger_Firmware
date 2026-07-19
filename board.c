@@ -7,6 +7,7 @@ created by suBardagi
 #include "inc/hw_memmap.h"
 #include "sysctl.h"
 #include "adc.h"
+#include "driverlib.h"
 
 void Board_initGPIO(void)
 {
@@ -51,7 +52,6 @@ void Board_initADC(void)
     ADC_setVREF(ADCC_BASE, ADC_REFERENCE_EXTERNAL, ADC_REFERENCE_3_3V);
 
     ADC_setPrescaler(ADCA_BASE, ADC_CLK_DIV_2_0);
-    ADC_setMode(ADCA_BASE, ADC_RESOLUTION_12BIT, ADC_MODE_SINGLE_ENDED);
     ADC_setInterruptPulseMode(ADCA_BASE, ADC_PULSE_END_OF_CONV);
 
     ADC_enableConverter(ADCA_BASE);
