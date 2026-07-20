@@ -49,7 +49,7 @@
 //
 #include "driverlib.h"
 #include "device.h"
-#include "board.h"
+#include "board-lib/board.h"
 
 //
 // Main

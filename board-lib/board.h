@@ -5,7 +5,6 @@ created by suBardagi
 #ifndef BOARD_H_
 #define BOARD_H_
 
-#include "board.h"
 #include "driverlib.h"
 #include "device.h"
 
