@@ -106,17 +106,6 @@ targetConfigs/TMS320F280049C.ccxml
 <files>
 This section contains the contents of the repository's files.
 
-<file path="board-lib/20072026.theia-workspace">
-{
-  "folders": [
-    {
-      "path": "file:///c%3A/Users/90541/workspace_ccstheia"
-    }
-  ],
-  "settings": {}
-}
-</file>
-
 <file path=".ccsproject">
 <?xml version="1.0" encoding="UTF-8" ?>
 <?ccsproject version="1.0"?>
@@ -452,6 +441,17 @@ SECTIONS
 // End of file.
 //===========================================================================
 */
+</file>
+
+<file path="board-lib/20072026.theia-workspace">
+{
+  "folders": [
+    {
+      "path": "file:///c%3A/Users/90541/workspace_ccstheia"
+    }
+  ],
+  "settings": {}
+}
 </file>
 
 <file path="board-lib/board.c">
@@ -31997,6 +31997,8 @@ float pid_compute(PID_controller *pid, float set, float measurement){
                                     <listOptionValue value="${PROJECT_ROOT}/device"/>
                                     <listOptionValue value="${C2000WARE_DLIB_ROOT}"/>
                                     <listOptionValue value="${CG_TOOL_ROOT}/include"/>
+                                    <listOptionValue value="${PROJECT_ROOT}/freertos/Source/include"/>
+                                    <listOptionValue value="${PROJECT_ROOT}/freertos/Source/portable/CCS/C2000_C28x"/>
                                 </option>
                                 <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DEFINE.1292887332" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DEFINE" valueType="definedSymbols">
                                     <listOptionValue value="${SYSCONFIG_TOOL_SYMBOLS}"/>
@@ -32052,7 +32054,7 @@ float pid_compute(PID_controller *pid, float set, float measurement){
                         </toolChain>
                     </folderInfo>
                     <sourceEntries>
-                        <entry excluding="c2000.syscfg|device/driverlib|28004x_generic_flash_lnk.cmd|targetConfigs/TMS320F280049C_LaunchPad.ccxml" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+                        <entry excluding="freertos/Source/portable/MemMang/heap_5.c|freertos/Source/portable/MemMang/heap_3.c|freertos/Source/portable/MemMang/heap_2.c|freertos/Source/portable/MemMang/heap_1.c|c2000.syscfg|device/driverlib|28004x_generic_flash_lnk.cmd|targetConfigs/TMS320F280049C_LaunchPad.ccxml" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
                     </sourceEntries>
                 </configuration>
             </storageModule>
