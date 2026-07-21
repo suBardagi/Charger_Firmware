@@ -50,6 +50,19 @@
 #include "driverlib.h"
 #include "device.h"
 #include "board-lib/board.h"
+#include "FreeRTOS.h"
+#include "gpio.h"
+#include "pin_map.h"
+#include "task.h"
+
+
+void cHeartBeatTask(void *pvParameters)
+{
+    for(;;){
+        GPIO_togglePin(GPIO_31_GPIO31);
+    }
+}
+
 
 //
 // Main
