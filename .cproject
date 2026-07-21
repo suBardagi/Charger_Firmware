@@ -53,6 +53,8 @@
                                     <listOptionValue value="${PROJECT_ROOT}/device"/>
                                     <listOptionValue value="${C2000WARE_DLIB_ROOT}"/>
                                     <listOptionValue value="${CG_TOOL_ROOT}/include"/>
+                                    <listOptionValue value="${PROJECT_ROOT}/freertos/Source/include"/>
+                                    <listOptionValue value="${PROJECT_ROOT}/freertos/Source/portable/CCS/C2000_C28x"/>
                                 </option>
                                 <option id="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DEFINE.1292887332" superClass="com.ti.ccstudio.buildDefinitions.C2000_22.6.compilerID.DEFINE" valueType="definedSymbols">
                                     <listOptionValue value="${SYSCONFIG_TOOL_SYMBOLS}"/>
@@ -108,7 +110,7 @@
                         </toolChain>
                     </folderInfo>
                     <sourceEntries>
-                        <entry excluding="c2000.syscfg|device/driverlib|28004x_generic_flash_lnk.cmd|targetConfigs/TMS320F280049C_LaunchPad.ccxml" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+                        <entry excluding="freertos/Source/portable/MemMang/heap_5.c|freertos/Source/portable/MemMang/heap_3.c|freertos/Source/portable/MemMang/heap_2.c|freertos/Source/portable/MemMang/heap_1.c|c2000.syscfg|device/driverlib|28004x_generic_flash_lnk.cmd|targetConfigs/TMS320F280049C_LaunchPad.ccxml" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
                     </sourceEntries>
                 </configuration>
             </storageModule>
