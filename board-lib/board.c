@@ -23,7 +23,7 @@ void Board_initGPIO(void)
     GPIO_setPinConfig(GPIO_8_EPWM5_A);
     GPIO_setPinConfig(GPIO_9_EPWM5_B);
     GPIO_setPinConfig(GPIO_10_EPWM6_A);
-    GPIO_setPinConfig(GPIO_11_EPWM6_B);
+    //GPIO_setPinConfig(GPIO_11_EPWM6_B);
 
     // CAN routing
     GPIO_setPinConfig(GPIO_12_CANB_TX);

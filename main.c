@@ -60,13 +60,15 @@
 #include "charger_control-lib/control.h"
 
 
-void cHeartBeatTask(void *pvParameters)
+//extern void vHeartbeatTask(void *pvParameters);
+
+/*void cHeartBeatTask(void *pvParameters)
 {
     for(;;){
-        GPIO_togglePin(GPIO_31_GPIO31);
+        GPIO_togglePin(11);
         vTaskDelay(pdMS_TO_TICKS(500));
     }
-}
+}*/
 
 //
 // Main
@@ -100,23 +102,31 @@ void main(void)
     //
     Board_init();
 
+    GPIO_setPinConfig(GPIO_11_GPIO11);
+    GPIO_setDirectionMode(11U, GPIO_DIR_MODE_OUT);
+
     //
     // C2000Ware Library initialization
     //
     //C2000Ware_libraries_init();
 
-    Interrupt_register(INT_ADCA1, &adca1_isr);
-    Interrupt_enable(INT_ADCA1);
+    //Interrupt_register(INT_ADCA1, &adca1_isr);
+    //Interrupt_enable(INT_ADCA1);
 
     //
     // Enable Global Interrupt (INTM) and real time interrupt (DBGM)
     //
+    //xTaskCreate(vHeartbeatTask, "Heartbeat", configMINIMAL_STACK_SIZE, NULL, 1, NULL);
+
     EINT;
     ERTM;
 
+    //vTaskStartScheduler();
+
     while(1)
     {
-        
+        GPIO_togglePin(GPIO_11_GPIO11);
+        DEVICE_DELAY_US(500);
     }
 }
 
