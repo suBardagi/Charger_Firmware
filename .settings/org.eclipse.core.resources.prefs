@@ -1,6 +1,8 @@
 eclipse.preferences.version=1
 encoding//CPU1_RAM/board-lib/subdir_rules.mk=UTF-8
 encoding//CPU1_RAM/board-lib/subdir_vars.mk=UTF-8
+encoding//CPU1_RAM/charger_control-lib/subdir_rules.mk=UTF-8
+encoding//CPU1_RAM/charger_control-lib/subdir_vars.mk=UTF-8
 encoding//CPU1_RAM/device/subdir_rules.mk=UTF-8
 encoding//CPU1_RAM/device/subdir_vars.mk=UTF-8
 encoding//CPU1_RAM/freertos/Source/portable/CCS/ARM_CM4/subdir_rules.mk=UTF-8

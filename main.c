@@ -47,22 +47,26 @@
 //
 // Included Files
 //
+#include "adc.h"
 #include "driverlib.h"
 #include "device.h"
 #include "board-lib/board.h"
 #include "FreeRTOS.h"
 #include "gpio.h"
+#include "inc/hw_memmap.h"
 #include "pin_map.h"
+#include "projdefs.h"
 #include "task.h"
+#include "charger_control-lib/control.h"
 
 
 void cHeartBeatTask(void *pvParameters)
 {
     for(;;){
         GPIO_togglePin(GPIO_31_GPIO31);
+        vTaskDelay(pdMS_TO_TICKS(500));
     }
 }
-
 
 //
 // Main
@@ -100,6 +104,9 @@ void main(void)
     // C2000Ware Library initialization
     //
     //C2000Ware_libraries_init();
+
+    Interrupt_register(INT_ADCA1, &adca1_isr);
+    Interrupt_enable(INT_ADCA1);
 
     //
     // Enable Global Interrupt (INTM) and real time interrupt (DBGM)
