@@ -109,51 +109,6 @@ targetConfigs/TMS320F280049C.ccxml
 <files>
 This section contains the contents of the repository's files.
 
-<file path="charger_control-lib/control.c">
-/*
-created by suBardagi
-*/
-
-#include "control.h"
-#include "board-lib/board.h"
-
-volatile uint16_t PFC_I_SENSE = 0;
-volatile uint16_t PFC_VDC_SENSE = 0;
-volatile uint16_t PFC_VAC_SENSE = 0;
-volatile uint16_t DAB_IND_I_SENSE = 0;
-volatile uint16_t DAB_VOUT_SENSE = 0;
-volatile uint16_t DAB_I_OUT_SENSE = 0;
-
-__interrupt void adca1_isr(void)
-{
-    ADC_clearInterruptStatus(ADCA_BASE, ADC_INT_NUMBER1);
-    Interrupt_clearACKGroup(INTERRUPT_ACK_GROUP1);
-}
-</file>
-
-<file path="charger_control-lib/control.h">
-/*
-created by suBardagi
-*/
-
-#ifndef _CONTROL_H_
-#define _CONTROL_H_
-
-#include "driverlib.h"
-#include "device.h"
-
-extern volatile uint16_t PFC_I_SENSE;
-extern volatile uint16_t PFC_VDC_SENSE;
-extern volatile uint16_t PFC_VAC_SENSE;
-extern volatile uint16_t DAB_IND_I_SENSE;
-extern volatile uint16_t DAB_VOUT_SENSE;
-extern volatile uint16_t DAB_I_OUT_SENSE;
-
-__interrupt void adca1_isr(void);
-
-#endif
-</file>
-
 <file path=".ccsproject">
 <?xml version="1.0" encoding="UTF-8" ?>
 <?ccsproject version="1.0"?>
@@ -565,6 +520,10 @@ void Board_initADC(void)
     ADC_setupSOC(ADCA_BASE, ADC_SOC_NUMBER0, ADC_TRIGGER_EPWM1_SOCA, PFC_I_SENSE_CH, ACQPS_SYS_CLKS);
     ADC_setupSOC(ADCA_BASE, ADC_SOC_NUMBER1, ADC_TRIGGER_EPWM1_SOCA, PFC_V_DC_MID_CH, ACQPS_SYS_CLKS);
     ADC_setupSOC(ADCA_BASE, ADC_SOC_NUMBER2, ADC_TRIGGER_EPWM1_SOCA, PFC_V_AC_CH, ACQPS_SYS_CLKS);
+    
+    ADC_setupSOC(ADCA_BASE, ADC_SOC_NUMBER3, ADC_TRIGGER_EPWM1_SOCA, DAB_IND_I_SENSE_CH , ACQPS_SYS_CLKS);
+    ADC_setupSOC(ADCA_BASE, ADC_SOC_NUMBER4, ADC_TRIGGER_EPWM1_SOCA, DAB_I_OUT_SENSE_CH, ACQPS_SYS_CLKS);
+    ADC_setupSOC(ADCA_BASE, ADC_SOC_NUMBER5, ADC_TRIGGER_EPWM1_SOCA, DAB_VOUT_SENSE_CH, ACQPS_SYS_CLKS);
 
     ADC_setInterruptSource(ADCA_BASE, ADC_INT_NUMBER1, ADC_SOC_NUMBER2);
     ADC_enableInterrupt(ADCA_BASE, ADC_INT_NUMBER1);
@@ -595,6 +554,61 @@ void Board_init(void){
     Board_initEPWM();
     Board_initADC();
 }
+</file>
+
+<file path="charger_control-lib/control.c">
+/*
+created by suBardagi
+*/
+
+#include "control.h"
+#include "adc.h"
+#include "board-lib/board.h"
+#include "inc/hw_memmap.h"
+
+volatile uint16_t PFC_I_SENSE = 0;
+volatile uint16_t PFC_VDC_SENSE = 0;
+volatile uint16_t PFC_VAC_SENSE = 0;
+volatile uint16_t DAB_IND_I_SENSE = 0;
+volatile uint16_t DAB_VOUT_SENSE = 0;
+volatile uint16_t DAB_I_OUT_SENSE = 0;
+
+__interrupt void adca1_isr(void)
+{
+    PFC_I_SENSE = ADC_readResult(ADCARESULT_BASE, ADC_SOC_NUMBER0);
+    PFC_I_SENSE = ADC_readResult(ADCARESULT_BASE, ADC_SOC_NUMBER1);
+    PFC_I_SENSE = ADC_readResult(ADCARESULT_BASE, ADC_SOC_NUMBER2);
+
+    PFC_I_SENSE = ADC_readResult(ADCARESULT_BASE, ADC_SOC_NUMBER3);
+    PFC_I_SENSE = ADC_readResult(ADCARESULT_BASE, ADC_SOC_NUMBER4);
+    PFC_I_SENSE = ADC_readResult(ADCARESULT_BASE, ADC_SOC_NUMBER5);
+
+    ADC_clearInterruptStatus(ADCA_BASE, ADC_INT_NUMBER1);
+    Interrupt_clearACKGroup(INTERRUPT_ACK_GROUP1);
+}
+</file>
+
+<file path="charger_control-lib/control.h">
+/*
+created by suBardagi
+*/
+
+#ifndef _CONTROL_H_
+#define _CONTROL_H_
+
+#include "driverlib.h"
+#include "device.h"
+
+extern volatile uint16_t PFC_I_SENSE;
+extern volatile uint16_t PFC_VDC_SENSE;
+extern volatile uint16_t PFC_VAC_SENSE;
+extern volatile uint16_t DAB_IND_I_SENSE;
+extern volatile uint16_t DAB_VOUT_SENSE;
+extern volatile uint16_t DAB_I_OUT_SENSE;
+
+__interrupt void adca1_isr(void);
+
+#endif
 </file>
 
 <file path="device/device.c">
@@ -31807,31 +31821,6 @@ float pid_compute(PID_controller *pid, float set, float measurement);
 </configurations>
 </file>
 
-<file path=".settings/org.eclipse.core.resources.prefs">
-eclipse.preferences.version=1
-encoding//CPU1_RAM/board-lib/subdir_rules.mk=UTF-8
-encoding//CPU1_RAM/board-lib/subdir_vars.mk=UTF-8
-encoding//CPU1_RAM/charger_control-lib/subdir_rules.mk=UTF-8
-encoding//CPU1_RAM/charger_control-lib/subdir_vars.mk=UTF-8
-encoding//CPU1_RAM/device/subdir_rules.mk=UTF-8
-encoding//CPU1_RAM/device/subdir_vars.mk=UTF-8
-encoding//CPU1_RAM/freertos/Source/portable/CCS/ARM_CM4/subdir_rules.mk=UTF-8
-encoding//CPU1_RAM/freertos/Source/portable/CCS/ARM_CM4/subdir_vars.mk=UTF-8
-encoding//CPU1_RAM/freertos/Source/portable/CCS/C2000_C28x/subdir_rules.mk=UTF-8
-encoding//CPU1_RAM/freertos/Source/portable/CCS/C2000_C28x/subdir_vars.mk=UTF-8
-encoding//CPU1_RAM/freertos/Source/portable/MemMang/subdir_rules.mk=UTF-8
-encoding//CPU1_RAM/freertos/Source/portable/MemMang/subdir_vars.mk=UTF-8
-encoding//CPU1_RAM/freertos/Source/subdir_rules.mk=UTF-8
-encoding//CPU1_RAM/freertos/Source/subdir_vars.mk=UTF-8
-encoding//CPU1_RAM/makefile=UTF-8
-encoding//CPU1_RAM/objects.mk=UTF-8
-encoding//CPU1_RAM/pid-lib/subdir_rules.mk=UTF-8
-encoding//CPU1_RAM/pid-lib/subdir_vars.mk=UTF-8
-encoding//CPU1_RAM/sources.mk=UTF-8
-encoding//CPU1_RAM/subdir_rules.mk=UTF-8
-encoding//CPU1_RAM/subdir_vars.mk=UTF-8
-</file>
-
 <file path="pid-lib/pid.c">
 /*
 created by suBardagi
@@ -31942,6 +31931,31 @@ float pid_compute(PID_controller *pid, float set, float measurement){
     return output;
 
 }
+</file>
+
+<file path=".settings/org.eclipse.core.resources.prefs">
+eclipse.preferences.version=1
+encoding//CPU1_RAM/board-lib/subdir_rules.mk=UTF-8
+encoding//CPU1_RAM/board-lib/subdir_vars.mk=UTF-8
+encoding//CPU1_RAM/charger_control-lib/subdir_rules.mk=UTF-8
+encoding//CPU1_RAM/charger_control-lib/subdir_vars.mk=UTF-8
+encoding//CPU1_RAM/device/subdir_rules.mk=UTF-8
+encoding//CPU1_RAM/device/subdir_vars.mk=UTF-8
+encoding//CPU1_RAM/freertos/Source/portable/CCS/ARM_CM4/subdir_rules.mk=UTF-8
+encoding//CPU1_RAM/freertos/Source/portable/CCS/ARM_CM4/subdir_vars.mk=UTF-8
+encoding//CPU1_RAM/freertos/Source/portable/CCS/C2000_C28x/subdir_rules.mk=UTF-8
+encoding//CPU1_RAM/freertos/Source/portable/CCS/C2000_C28x/subdir_vars.mk=UTF-8
+encoding//CPU1_RAM/freertos/Source/portable/MemMang/subdir_rules.mk=UTF-8
+encoding//CPU1_RAM/freertos/Source/portable/MemMang/subdir_vars.mk=UTF-8
+encoding//CPU1_RAM/freertos/Source/subdir_rules.mk=UTF-8
+encoding//CPU1_RAM/freertos/Source/subdir_vars.mk=UTF-8
+encoding//CPU1_RAM/makefile=UTF-8
+encoding//CPU1_RAM/objects.mk=UTF-8
+encoding//CPU1_RAM/pid-lib/subdir_rules.mk=UTF-8
+encoding//CPU1_RAM/pid-lib/subdir_vars.mk=UTF-8
+encoding//CPU1_RAM/sources.mk=UTF-8
+encoding//CPU1_RAM/subdir_rules.mk=UTF-8
+encoding//CPU1_RAM/subdir_vars.mk=UTF-8
 </file>
 
 <file path="main.c">
